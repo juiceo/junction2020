@@ -3,9 +3,9 @@ import React from 'react'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import { Box } from '@material-ui/core'
 
-import HomePage from './pages/Home'
 import Onboarding from './pages/Onboarding'
 import Details from './pages/Details'
+import Dashboard from './pages/Dashboard'
 
 function App() {
     return (
@@ -20,6 +20,7 @@ function App() {
                 <Switch>
                     <Route exact path="/" component={Onboarding} />
                     <Route exact path="/details" component={Details} />
+                    <Route exact path="/dashboard" component={Dashboard} />
                 </Switch>
             </Router>
         </Box>

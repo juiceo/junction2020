@@ -15,6 +15,7 @@ import {
     Checkbox,
 } from '@material-ui/core'
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles'
+import { useHistory } from 'react-router'
 
 const Assets: { [key: string]: string } = {
     CAR: 'Car',
@@ -26,6 +27,7 @@ const Details = (props: Props) => {
     const classes = useStyles()
     const [step, setStep] = useState<number>(0)
     const [assets, setAssets] = useState<string[]>([])
+    const history = useHistory()
 
     const handleChange = (event: any, checked: boolean) => {
         const { name } = event.target
@@ -136,9 +138,9 @@ const Details = (props: Props) => {
                             <Button
                                 color="primary"
                                 variant="contained"
-                                onClick={() => setStep(prev => prev + 1)}
+                                onClick={() => history.push('/dashboard')}
                             >
-                                Next
+                                Done
                             </Button>
                         </StepContent>
                     </Step>
