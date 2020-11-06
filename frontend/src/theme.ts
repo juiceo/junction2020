@@ -1,12 +1,12 @@
 import { createMuiTheme, responsiveFontSizes } from '@material-ui/core/styles'
 import { PaletteColor } from '@material-ui/core/styles/createPalette'
 
-declare module '@material-ui/core/styles/createPalette' {
-    interface Palette {
-        primary: PaletteColor
-        secondary: PaletteColor
-    }
-}
+// declare module '@material-ui/core/styles/createPalette' {
+//     interface Palette {
+//         primary: PaletteColor
+//         secondary: PaletteColor
+//     }
+// }
 
 const primary: PaletteColor = {
     main: '#d371d0',
