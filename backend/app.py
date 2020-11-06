@@ -16,12 +16,16 @@ def index():
     """
     start = request.args.get('start', '1900-01-01')
     end = request.args.get('end', '3000-01-01')
+    account_number = request.args.get('account', None)
     try:
         start = datetime.strptime(start, TIME_FORMAT)
         end = datetime.strptime(end, TIME_FORMAT)
-        transactions = (Transaction.query.filter(Transaction.tstamp > start)
-                .filter(Transaction.tstamp < end)
-                .order_by(Transaction.tstamp.asc()).limit(1000).all())
+        query = (Transaction.query.filter(Transaction.tstamp > start)
+                .filter(Transaction.tstamp < end))
+        if account_number:
+            query = query.filter(Transaction.tilinro == int(account_number))
+
+        transactions = query.order_by(Transaction.tstamp.asc()).limit(1000)
     except ValueError:
         return "Malformed query string", 400
     return flask.json.jsonify([t.serialize for t in transactions])
