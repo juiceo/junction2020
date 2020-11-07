@@ -23,10 +23,10 @@ const CircularEconomy = (props: Props) => {
                 </Box>
                 <img src={image} alt="" className={classes.image} />
                 <Box p={2}>
-                    <Typography variant="body1">Rent your tools</Typography>
+                    <Typography variant="body1">Rent your stuff</Typography>
                     <Typography variant="body2">
-                        Do you have some tools you can set for rent? Here are a few people in your neighborhood looking
-                        to rent some tools:
+                        Do you have some assets you can set for rent? You can make a little bit of extra money by
+                        renting your car, power drill or other items people in your neighborhood may need to lend.
                     </Typography>
                     <Box mt={3} display="flex" flexDirection="column" justifyContent="center" alignItems="center">
                         <Button variant="outlined" onClick={props.onAccept}>
