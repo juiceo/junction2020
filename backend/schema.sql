@@ -1,4 +1,5 @@
 DROP TABLE IF EXISTS transactions;
+DROP TABLE IF EXISTS yolo_bets;
 
 CREATE TABLE transactions(
   id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -17,6 +18,15 @@ CREATE TABLE transactions(
   viite INT,
   iban_saaja INT,
   counterparty_account_id INT
+);
+
+CREATE TABLE yolo_bets(
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  title TEXT,
+  body TEXT,
+  amount INT,
+  expected_irr FLOAT,
+  image_url TEXT
 );
 
 CREATE INDEX transaction_start_end ON transactions(tstamp);

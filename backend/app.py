@@ -10,6 +10,11 @@ TIME_FORMAT = '%Y-%m-%d'
 def to_date(datestring):
     return datetime.strptime(datestring, TIME_FORMAT)
 
+@app.after_request
+def after(response):
+    response.headers['Access-Control-Allow-Origin'] = '*'
+    return response
+
 @app.route('/')
 def index():
     """
@@ -65,5 +70,8 @@ def add_transactions(account):
         db.session.commit()
     return flask.json.jsonify([t.serialize for t in added])
 
+@app.route('/yolobets', methods=['GET'])
+def get_bets():
+    pass
 
 
