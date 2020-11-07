@@ -3,6 +3,7 @@ DROP TABLE IF EXISTS transactions;
 CREATE TABLE transactions(
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   category TEXT,
+  label TEXT,
   tstamp DATE,
   arvo_pvm DATE,
   kirjaus_pvm DATE,
