@@ -85,7 +85,10 @@ const Opportunities = (props: Props) => {
     if (showCircular) {
         views.push(
             <Box p={2}>
-                <CircularEconomy onSkip={() => setIndex((prev) => prev + 1)} onAccept={() => {}} />
+                <CircularEconomy
+                    onSkip={() => setIndex((prev) => prev + 1)}
+                    onAccept={() => window.open('https://www.rentle.io/careers', '_blank')}
+                />
             </Box>
         );
     }
