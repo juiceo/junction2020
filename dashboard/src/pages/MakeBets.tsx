@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import {
     Card,
     Container,
@@ -10,6 +10,7 @@ import {
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import { useSprings, animated, interpolate } from 'react-spring'
 import { useDrag } from 'react-use-gesture'
+import {Bet} from '../data/bets'
 
 const to = (i: number) => ({
   x: 0,
@@ -22,14 +23,35 @@ const from = (_i: number) => ({ x: 0, rot: 0, scale: 1.5, y: -1000 })
 // This is being used down there in the view, it interpolates rotation and scale into a css transform
 const trans = (r: number, s: number) => `perspective(1500px) rotateZ(${r}deg) scale(${s})`
 
-let cards = [1, 2, 3]
+
+function BetCard(props: {bet: Bet}) {
+    const classes = useStyles()
+    return (<Grid>
+        <div className={classes.image} style={{backgroundImage: `url(${props.bet.imageUrl})`}}>
+        </div>
+        <Typography variant="h5">{props.bet.title}</Typography>
+        <p>{props.bet.body}</p>
+    </Grid>)
+}
+
+
 export default function MakeBets() {
     const classes = useStyles()
     //const [expenses, setExpenses] = useState<ExpenseTransaction[]>([]);
     const [gone] = useState(() => new Set())
-    const [props, set] = useSprings(cards.length, i => ({
+    const [bets, setBets] = useState<Array<Bet>>(() => {
+      fetch('http://localhost:5000/yolobets')
+        .then((res) => {
+          res.json().then((bets) => {
+            setBets(bets.map((bet: any) => new Bet(bet.title, bet.body, bet.amount, bet.expected_irr, bet.image_url, bet.taken)))
+          })
+        })
+      return []
+    })
+
+    const [props, set] = useSprings(bets.length, i => ({
         ...to(i),
-        from: from(i),
+        from: from(i)
     })) // Create a bunch of springs using the helpers above
     const bind = useDrag(({ args: [index], down, movement: [mx], direction: [xDir], velocity }) => {
         const trigger = velocity > 0.2 // If you flick hard enough it should trigger the card to fly out
@@ -50,13 +72,15 @@ export default function MakeBets() {
             config: { friction: 50, tension: down ? 800 : isGone ? 200 : 500 },
           }
         })
-        if (!down && gone.size === cards.length) setTimeout(() => void gone.clear() || set(i => to(i)), 600)
+        if (!down && gone.size === bets.length) {
+          setTimeout(() => void gone.clear() || set(i => to(i)), 600)
+        }
     })
     const AnimatedCard = animated(Card)
     return (
         <Container>
             <Box p={2} className='content'>
-                <Typography variant="h3">Todays bets</Typography>
+                <Typography variant="h3">YOLOBets™</Typography>
                 <Box p={2} className={classes.wrapper}>
               {props.map(({x, y, rot, scale}, i) =>
                 (<animated.div key={i} style={{x, y}}>
@@ -66,12 +90,7 @@ export default function MakeBets() {
                       transform: interpolate([rot, scale], trans)
                       //backgroundImage: `url(${cards[i]})`,
                     }}>
-                    <Grid>
-                        <div className={classes.image} style={{backgroundImage: "url(https://images.unsplash.com/photo-1559526642-c3f001ea68ee?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=967&q=80)"}}>
-                        </div>
-                        <p>This is a card</p>
-                    </Grid>
-
+                    <BetCard bet={bets[i]} />
                     </AnimatedCard>
                 </animated.div>
               ))}
@@ -99,7 +118,8 @@ const useStyles = makeStyles((theme: Theme) =>
         },
         image: {
             width: '50vw',
-            height: '50vh'
+            height: '50vh',
+            backgroundPosition: 'center'
         }
     })
 );

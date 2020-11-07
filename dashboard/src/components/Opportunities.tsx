@@ -5,6 +5,8 @@ import SwipeableViews from 'react-swipeable-views';
 
 import ExpenseWarning from './ExpenseWarning';
 import CircularEconomy from './CircularEconomy';
+import EatingOutside from './EatingOutside';
+import InvestGambling from './InvestGambling';
 import SalaryAlert from './SalaryAlert';
 import SavingsGoal from './SavingsGoal';
 import DoneCard from './DoneCard';
