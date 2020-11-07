@@ -21,8 +21,6 @@ const Opportunities = (props: Props) => {
     const classes = useStyles();
     const [index, setIndex] = useState<number>(0);
 
-    console.log('PROPS', props);
-
     const showInvestment = props.averageDeficit > 8;
     const showSavingsGoal = props.averageDeficit > -2 && props.averageDeficit < 5;
     const showSalary = props.averageDeficit < -2;
