@@ -90,6 +90,9 @@ const CreateUser = (props: Props) => {
             const options = {
                 method: 'POST',
                 body: JSON.stringify(transactions),
+                headers: {
+                    'Content-Type': 'application/json',
+                },
             };
             await fetch(`http://localhost:5000/account/${accountNo}/transactions`, options)
                 .then((res) => res.json())
