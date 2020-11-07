@@ -2,7 +2,7 @@ import React from 'react';
 import { Paper, Box, Typography, Button } from '@material-ui/core';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 
-import WhatshotIcon from '@material-ui/icons/Whatshot';
+import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
 
 interface Props {
     onAccept: () => void;
@@ -16,33 +16,31 @@ const ExpenseWarning = (props: Props) => {
         <Paper>
             <Box p={2}>
                 <Box className={classes.tag} mb={3}>
-                    <WhatshotIcon /> <Box mr={1} /> You're burning money!
+                    <AttachMoneyIcon /> <Box mr={1} /> Salary Alert
                 </Box>
-                <Typography variant="body1">Limit your streaming services</Typography>
+                <Typography variant="body1">Check your salary</Typography>
                 <Typography variant="body2">
-                    You are spending a lot more than average on streaming services! Maybe you don't need to have them
-                    all? Here's your spending compared to the average in your income bracket:{' '}
+                    Your salary last year was <strong>38,400€</strong> - a bit less than your industry average! If you
+                    negotiate a <strong>200€ /mo</strong> raise, you can afford your current lifestyle!
                 </Typography>
                 <Box display="flex" flexDirection="row" my={4}>
                     <Box
-                        className={classes.red}
+                        className={classes.text}
                         flex={1}
                         display="flex"
                         flexDirection="column"
                         alignItems="center"
                         justifyContent="center"
                     >
-                        <Typography variant="h3">124,90€</Typography>
-                        <Typography variant="body1">You</Typography>
-                    </Box>
-                    <Box flex={1} display="flex" flexDirection="column" alignItems="center" justifyContent="center">
-                        <Typography variant="h3">34,50€</Typography>
-                        <Typography variant="body1">Average</Typography>
+                        <Typography variant="h3">46,000€</Typography>
+                        <Typography variant="body1" align="center">
+                            Industry average (Senior software developer / Helsinki)
+                        </Typography>
                     </Box>
                 </Box>
                 <Box display="flex" flexDirection="column" justifyContent="center" alignItems="center">
                     <Button variant="outlined" onClick={props.onAccept}>
-                        Set a spending limit
+                        See glassdoor
                     </Button>
                     <Box mt={3} />
                     <Button size="small" onClick={props.onSkip}>
@@ -56,14 +54,14 @@ const ExpenseWarning = (props: Props) => {
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
-        red: {
-            color: '#eb4c00',
+        text: {
+            color: '#B3DC4A',
         },
         tag: {
             display: 'flex',
             flexDirection: 'row',
             alignItems: 'center',
-            color: '#eb4c00',
+            color: '#B3DC4A',
         },
     })
 );

@@ -8,6 +8,10 @@ import ExpenseWarning from './ExpenseWarning';
 import CircularEconomy from './CircularEconomy';
 import EatingOutside from './EatingOutside';
 import InvestGambling from './InvestGambling';
+import SalaryAlert from './SalaryAlert';
+import SavingsGoal from './SavingsGoal';
+import DoneCard from './DoneCard';
+import InvestmentOpportunity from './InvestmentOpportunity';
 
 interface Props {}
 const Opportunities = (props: Props) => {
@@ -24,10 +28,27 @@ const Opportunities = (props: Props) => {
                     <EatingOutside onSkip={() => setIndex((prev) => prev + 1)} onAccept={() => {}} />
                 </Box>
                 <Box p={2}>
+                    <InvestmentOpportunity onSkip={() => setIndex((prev) => prev + 1)} onAccept={() => {}} />
+                </Box>
+                <Box p={2}>
+                    <SavingsGoal onSkip={() => setIndex((prev) => prev + 1)} onAccept={() => {}} />
+                </Box>
+                <Box p={2}>
+                    <SalaryAlert
+                        onSkip={() => setIndex((prev) => prev + 1)}
+                        onAccept={() => {
+                            window.open('https://glassdoor.com', '_blank');
+                        }}
+                    />
+                </Box>
+                <Box p={2}>
                     <ExpenseWarning onSkip={() => setIndex((prev) => prev + 1)} onAccept={() => {}} />
                 </Box>
                 <Box p={2}>
                     <CircularEconomy onSkip={() => setIndex((prev) => prev + 1)} onAccept={() => {}} />
+                </Box>
+                <Box p={2}>
+                    <DoneCard />
                 </Box>
             </SwipeableViews>
         </Box>

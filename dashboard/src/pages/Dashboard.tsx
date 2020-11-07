@@ -12,6 +12,7 @@ import WhatshotIcon from '@material-ui/icons/Whatshot';
 
 import img1 from '../assets/erotic-painting.png';
 import Opportunities from '../components/Opportunities';
+import { ReactComponent as Logo } from '../assets/isolated-layout.svg';
 
 interface Props {}
 
@@ -48,6 +49,7 @@ const Dashboard = (props: Props) => {
                 <Typography variant="body1" gutterBottom>
                     Means Dashboard - {accountNumber}
                 </Typography>
+
                 {loading ? (
                     <Box display="flex" width="100%" height={300} alignItems="center" justifyContent="center">
                         Loading
