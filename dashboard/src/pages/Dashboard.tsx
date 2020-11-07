@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Box, Typography, Paper } from '@material-ui/core';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
+import { useParams } from 'react-router';
 import moment from 'moment';
 
 import DailyBalanceChart from '../components/DailyBalanceChart';
@@ -11,8 +12,23 @@ import { student } from '../data/profiles';
 interface Props {}
 const Dashboard = (props: Props) => {
     const classes = useStyles();
+    const [loading, setLoading] = useState<boolean>(true);
+    const { accountNumber } = useParams<{ accountNumber: string }>();
 
-    const yearlySalary = 100_000;
+    const fetchTransactions = useCallback(async () => {
+        setLoading(true);
+        const url = `http://localhost:5000/?start=2020-01-01&end=2021-01-01?account=${accountNumber}`;
+        await fetch(url)
+            .then((res) => res.json())
+            .then((data) => {
+                console.log('DATA', data);
+            });
+        setLoading(false);
+    }, [accountNumber]);
+
+    useEffect(() => {
+        fetchTransactions();
+    }, [fetchTransactions]);
 
     const expenses = generateExpenses(
         student,
@@ -26,13 +42,20 @@ const Dashboard = (props: Props) => {
         <Box className={classes.wrapper}>
             <Box className={classes.content}>
                 <Typography variant="body1" gutterBottom>
-                    Means Dashboard
+                    Means Dashboard - {accountNumber}
                 </Typography>
-                <Paper>
+                {loading ? (
+                    <Box display="flex" width="100%" height={300} alignItems="center" justifyContent="center">
+                        Loading
+                    </Box>
+                ) : (
+                    <Box>Hello</Box>
+                )}
+                {/* <Paper>
                     <Box p={2}>
                         <DailyBalanceChart data={getBalanceByDay(yearlySalary)} />
                     </Box>
-                </Paper>
+                </Paper> */}
                 {/* <Box mt={2} className={classes.stats}>
                     
                 </Box> */}
