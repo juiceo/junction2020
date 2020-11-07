@@ -7,14 +7,17 @@ import random
 
 TIME_FORMAT = '%Y-%m-%d'
 
+
 def to_date(datestring):
     return datetime.strptime(datestring, TIME_FORMAT)
+
 
 @app.after_request
 def after(response):
     response.headers['Access-Control-Allow-Origin'] = '*'
-    response.headers['Access-Control-Allow-Headers'] = 'Content-Type'
+    response.headers['Access-Control-Allow-Headers'] = '*'
     return response
+
 
 @app.route('/')
 def index():
@@ -29,7 +32,7 @@ def index():
         start = datetime.strptime(start, TIME_FORMAT)
         end = datetime.strptime(end, TIME_FORMAT)
         query = (Transaction.query.filter(Transaction.tstamp > start)
-                .filter(Transaction.tstamp < end))
+                 .filter(Transaction.tstamp < end))
         if account_number:
             query = query.filter(Transaction.tilinro == int(account_number))
 
@@ -38,11 +41,13 @@ def index():
         return "Malformed query string", 400
     return flask.json.jsonify([t.serialize for t in transactions])
 
+
 @app.route('/account/<int:account>/category')
 def aggregate(account):
     grouped = (db.session.query(Transaction.category, db.func.sum(Transaction.rahamaara).label('sum'))
-            .filter(Transaction.tilinro == account).group_by(Transaction.category).all())
+               .filter(Transaction.tilinro == account).group_by(Transaction.category).all())
     return flask.json.jsonify(grouped)
+
 
 @app.route('/account/<int:account>/transactions', methods=['POST'])
 def add_transactions(account):
@@ -52,29 +57,32 @@ def add_transactions(account):
     added = []
     for transaction in transactions:
         t = Transaction(category=transaction['category'],
-            tstamp=to_date(transaction['tstamp']),
-            label=transaction['label'],
-            rahamaara=int(transaction['amount'] * 100),
-            tilinro=transaction.get('account', account),
-            counterparty_account_id=transaction.get('counterparty_account_id', random.randint(0, 100)),
-            saldo=transaction.get('saldo', None))
+                        tstamp=to_date(transaction['tstamp']),
+                        label=transaction['label'],
+                        rahamaara=int(transaction['amount'] * 100),
+                        tilinro=transaction.get('account', account),
+                        counterparty_account_id=transaction.get(
+                            'counterparty_account_id', random.randint(0, 100)),
+                        saldo=transaction.get('saldo', None))
         db.session.add(t)
         added.append(t)
     db.session.commit()
     for transaction in added:
         amount = (db.session.query(db.func.sum(Transaction.rahamaara).label('sum'))
-                .filter(Transaction.tstamp < transaction.tstamp)
-                .filter(Transaction.tilinro == transaction.tilinro)
-                .first())[0]
+                  .filter(Transaction.tstamp < transaction.tstamp)
+                  .filter(Transaction.tilinro == transaction.tilinro)
+                  .first())[0]
         transaction.saldo = amount
         db.session.add(transaction)
         db.session.commit()
     return flask.json.jsonify([t.serialize for t in added])
 
+
 @app.route('/yolobets', methods=['GET'])
 def get_bets():
     bets = YOLOBets.query.all()
     return flask.json.jsonify([t.serialize for t in bets])
+
 
 @app.route('/yolobets/<int:bet_id>', methods=['POST'])
 def take_bet(bet_id):
@@ -83,5 +91,3 @@ def take_bet(bet_id):
     db.session.add(bet)
     db.session.commit()
     return flask.json.jsonify(bet.serialize)
-
-

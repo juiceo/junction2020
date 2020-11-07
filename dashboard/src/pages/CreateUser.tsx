@@ -80,7 +80,7 @@ const CreateUser = (props: Props) => {
             return {
                 accountno: accountNo.toString(),
                 amount: Number(expense.amount) * -1,
-                tstamp: moment(expense.timestamp).toISOString(),
+                tstamp: moment(expense.timestamp).format('YYYY-MM-DD'),
                 category: expense.category,
                 label: expense.label,
             };
