@@ -10,7 +10,7 @@ import theme from './theme';
 
 WebFont.load({
     google: {
-        families: ['Montserrat:700', 'Source+Sans+Pro:400,700'],
+        families: ['Questrial:700,400'],
     },
 });
 

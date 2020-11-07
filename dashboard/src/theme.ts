@@ -22,8 +22,8 @@ const secondary: PaletteColor = {
     contrastText: '#000000',
 };
 
-const titleFont: string = ['"Montserrat"', 'sans-serif'].join(',');
-const bodyFont: string = ['"Source Sans Pro"', 'sans-serif'].join(',');
+const titleFont: string = ['"Questrial"', 'sans-serif'].join(',');
+const bodyFont: string = ['"Questrial"', 'sans-serif'].join(',');
 
 const theme = createMuiTheme({
     palette: {

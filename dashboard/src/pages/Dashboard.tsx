@@ -11,6 +11,7 @@ import { DailyBalance, getBalanceByDay } from '../data/utils';
 import WhatshotIcon from '@material-ui/icons/Whatshot';
 
 import img1 from '../assets/erotic-painting.png';
+import Opportunities from '../components/Opportunities';
 
 interface Props {}
 
@@ -106,19 +107,13 @@ const Dashboard = (props: Props) => {
                                 </Box>
                             </Paper>
                         </Box>
+                        <Box p={5}>
+                            <Typography variant="body1" align="center">
+                                Oh-oh! You seem to be a bit strapped for cash - here's a few suggestions:
+                            </Typography>
+                        </Box>
                         <Box mt={2}>
-                            <Paper>
-                                <Box p={2}>
-                                    <Typography variant="body1">
-                                        <WhatshotIcon /> Opportunity
-                                    </Typography>
-                                    <Typography variant="body2">
-                                        Make music for porn movies! On average you would need to do this for{' '}
-                                        <strong>2.5hrs per week</strong> to get back to even!
-                                    </Typography>
-                                </Box>
-                                <img src={img1} width="100%" height="300" alt="" style={{ objectFit: 'cover' }} />
-                            </Paper>
+                            <Opportunities />
                         </Box>
                     </>
                 )}
@@ -133,6 +128,7 @@ const useStyles = makeStyles((theme: Theme) =>
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
+            padding: theme.spacing(2),
             paddingTop: theme.spacing(4),
         },
         content: {
