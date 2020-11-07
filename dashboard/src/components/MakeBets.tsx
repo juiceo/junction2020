@@ -44,7 +44,7 @@ export default function MakeBets() {
     //const [expenses, setExpenses] = useState<ExpenseTransaction[]>([]);
     const [gone] = useState(() => new Set());
     const [bets, setBets] = useState<Array<Bet>>(() => {
-        fetch('https://yolobets.herokuapp.com/yolobets').then((res) => {
+        fetch('https://cors-anywhere.herokuapp.com/https://yolobets.herokuapp.com/yolobets').then((res) => {
             res.json().then((bets) => {
                 setBets(
                     bets.map(

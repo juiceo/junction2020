@@ -72,7 +72,10 @@ const CreateUser = (props: Props) => {
                     'Content-Type': 'application/json',
                 },
             };
-            await fetch(`https://yolobets.herokuapp.com/account/${accountNo}/transactions`, options as any)
+            await fetch(
+                `https://cors-anywhere.herokuapp.com/https://yolobets.herokuapp.com/account/${accountNo}/transactions`,
+                options as any
+            )
                 .then((res) => res.json())
                 .then((res) => console.log(res));
             history.push('/dashboard/' + accountNo);

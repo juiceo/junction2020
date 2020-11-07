@@ -1,11 +1,9 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { Box, Typography, Paper } from '@material-ui/core';
+import { Box, Paper, Typography } from '@material-ui/core';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import { useParams } from 'react-router';
 import { meanBy, sumBy } from 'lodash';
 import classNames from 'classnames';
-import moment from 'moment';
-import MakeBets from './MakeBets';
 
 import DailyBalanceChart from '../components/DailyBalanceChart';
 import { DailyBalance, getBalanceByDay } from '../data/utils';
@@ -27,7 +25,7 @@ const Dashboard = (props: Props) => {
 
     const fetchTransactions = useCallback(async () => {
         setLoading(true);
-        const url = `https://yolobets.herokuapp.com/?start=2020-01-01&end=2021-01-01&account=${accountNumber}`;
+        const url = `https://cors-anywhere.herokuapp.com/https://yolobets.herokuapp.com/?start=2020-01-01&end=2021-01-01&account=${accountNumber}`;
         await fetch(url)
             .then((res) => res.json())
             .then((data) => {
@@ -50,9 +48,9 @@ const Dashboard = (props: Props) => {
                 <Box display="flex" flexDirection="column" alignItems="center" mb={3}>
                     <img src={logo} alt="Means Logo" style={{ width: '50%', margin: '0 auto' }} />
                 </Box>
-                {/* <Typography variant="body1" gutterBottom>
-                    Means Dashboard - {accountNumber}
-                </Typography> */}
+                <Box p={2}>
+                    <Typography align="center">Account {accountNumber}</Typography>
+                </Box>
 
                 {loading ? (
                     <Box display="flex" width="100%" height={300} alignItems="center" justifyContent="center">
@@ -119,9 +117,6 @@ const Dashboard = (props: Props) => {
                                 totalDeficit={totalDeficit}
                                 runwayDays={runwayDays}
                             />
-                        </Box>
-                        <Box mt={2}>
-                            <MakeBets />
                         </Box>
                     </>
                 )}

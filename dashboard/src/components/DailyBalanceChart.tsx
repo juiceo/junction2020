@@ -133,7 +133,7 @@ const DeficitChart = (props: Props) => {
                 </ResponsiveContainer>
             </div>
             {activeDay && (
-                <Box mt={3}>
+                <Box mt={3} p={2}>
                     <Typography>
                         {moment(activeDay).format('MMM Do YYYY')}{' '}
                         <IconButton onClick={() => setActiveDay(null)}>

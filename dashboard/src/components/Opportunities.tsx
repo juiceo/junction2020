@@ -11,6 +11,7 @@ import SalaryAlert from './SalaryAlert';
 import SavingsGoal from './SavingsGoal';
 import DoneCard from './DoneCard';
 import InvestmentOpportunity from './InvestmentOpportunity';
+import MakeBets from './MakeBets';
 
 interface Props {
     averageDeficit: number;
@@ -109,6 +110,16 @@ const Opportunities = (props: Props) => {
             <DoneCard />
         </Box>
     );
+
+    if (index === views.length - 1) {
+        return (
+            <Box>
+                <Box mt={2}>
+                    <MakeBets />
+                </Box>
+            </Box>
+        );
+    }
 
     return (
         <Box m={-2}>
