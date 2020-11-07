@@ -25,8 +25,8 @@ const InvestGambling = (props: Props) => {
                 <Box p={2}>
                     <Typography variant="body1">... on Eurojackpot!</Typography>
                     <Typography variant="body2">
-                    Are you interested in being a millionaire? Bet your savings and you can make up to 15M€!
-
+                        You seem to be doing alright but who wouldn't want to be a millionaire? Bet your savings and you
+                        can make up to 15M€!
                     </Typography>
                     <Box mt={3} display="flex" flexDirection="column" justifyContent="center" alignItems="center">
                         <Button variant="outlined" onClick={props.onAccept}>

@@ -59,7 +59,9 @@ const InvestmentOpportunity = (props: Props) => {
                                 }
                             />
                             <ListItemSecondaryAction>
-                                <Button size="small">Invest</Button>
+                                <Button size="small" onClick={props.onAccept}>
+                                    Invest
+                                </Button>
                             </ListItemSecondaryAction>
                         </ListItem>
                         <ListItem>
@@ -76,7 +78,9 @@ const InvestmentOpportunity = (props: Props) => {
                                 }
                             />
                             <ListItemSecondaryAction>
-                                <Button size="small">Invest</Button>
+                                <Button size="small" onClick={props.onAccept}>
+                                    Invest
+                                </Button>
                             </ListItemSecondaryAction>
                         </ListItem>
                         <ListItem>
@@ -93,7 +97,9 @@ const InvestmentOpportunity = (props: Props) => {
                                 }
                             />
                             <ListItemSecondaryAction>
-                                <Button size="small">Invest</Button>
+                                <Button size="small" onClick={props.onAccept}>
+                                    Invest
+                                </Button>
                             </ListItemSecondaryAction>
                         </ListItem>
                     </List>

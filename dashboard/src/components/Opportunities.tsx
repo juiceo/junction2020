@@ -26,6 +26,7 @@ const Opportunities = (props: Props) => {
     const showSalary = props.averageDeficit < -2;
     const showExpense = props.averageDeficit < -2;
     const showCircular = props.averageDeficit < 1;
+    const showGambling = props.averageDeficit > 10;
     const views = [];
 
     const getText = () => {
@@ -45,7 +46,7 @@ const Opportunities = (props: Props) => {
                 <InvestmentOpportunity
                     monthlySurplus={(props.averageDeficit * 365) / 12}
                     onSkip={() => setIndex((prev) => prev + 1)}
-                    onAccept={() => {}}
+                    onAccept={() => window.open('https://robinhood.com/us/en/')}
                 />
             </Box>
         );
@@ -82,8 +83,19 @@ const Opportunities = (props: Props) => {
 
     if (showCircular) {
         views.push(
-            <Box>
+            <Box p={2}>
                 <CircularEconomy onSkip={() => setIndex((prev) => prev + 1)} onAccept={() => {}} />
+            </Box>
+        );
+    }
+
+    if (showGambling) {
+        views.push(
+            <Box p={2}>
+                <InvestGambling
+                    onSkip={() => setIndex((prev) => prev + 1)}
+                    onAccept={() => window.open('https://www.eurojackpot.com/', '_blank')}
+                />
             </Box>
         );
     }
