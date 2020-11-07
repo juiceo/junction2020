@@ -5,10 +5,6 @@ on:
         branches:
             - master
 
-defaults:
-    run:
-        working-directory: ./dashboard
-
 jobs:
     build-and-deploy:
         runs-on: ubuntu-latest
@@ -20,12 +16,17 @@ jobs:
               with:
                   node-version: '12.x'
             - run: npm install
+              with:
+                  workingDirectory: 'dashboard'
             - run: npm run build --if-present
               env:
                   CI: false
-            - name: Publish
+              with:
+                  workingDirectory: 'dashboard'
+            - name: Publishgit stat
               uses: cloudflare/wrangler-action@1.1.0
               with:
                   apiToken: ${{ secrets.CF_API_TOKEN }}
+                  workingDirectory: 'dashboard'
               env:
                   CF_ACCOUNT_ID: ${{secrets.CF_ACCOUNT_ID}}
