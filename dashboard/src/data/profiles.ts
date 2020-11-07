@@ -29,7 +29,6 @@ export type SpenderProfile = {
 };
 
 export const student: SpenderProfile = {
-
     monthlyFixedExpenses: [
         {
             category: 'Transport',
@@ -50,12 +49,12 @@ export const student: SpenderProfile = {
             category: 'Living',
             label: 'Phone bill',
             amount: 30,
-        },        
+        },
         {
             category: 'Living',
             label: 'Electricity',
             amount: 30,
-        },        
+        },
         {
             category: 'Living',
             label: 'Home insurance',
@@ -66,9 +65,7 @@ export const student: SpenderProfile = {
             label: 'Internet',
             amount: 30,
         },
-        
     ],
-
 
     dailyRandomExpenses: [
         {
@@ -102,11 +99,9 @@ export const student: SpenderProfile = {
             probability: 1,
         },
     ],
-
 };
 
 export const constructionWorker: SpenderProfile = {
-
     monthlyFixedExpenses: [
         {
             category: 'Transport',
@@ -122,12 +117,12 @@ export const constructionWorker: SpenderProfile = {
             category: 'Living',
             label: 'Phone bill',
             amount: 30,
-        },        
+        },
         {
             category: 'Living',
             label: 'Electricity',
             amount: 30,
-        },        
+        },
         {
             category: 'Living',
             label: 'Home insurance',
@@ -138,10 +133,8 @@ export const constructionWorker: SpenderProfile = {
             label: 'Internet',
             amount: 30,
         },
-
     ],
 
-    
     dailyRandomExpenses: [
         {
             category: 'Food',
@@ -192,7 +185,6 @@ export const constructionWorker: SpenderProfile = {
 };
 
 export const instagramInfluencer: SpenderProfile = {
-
     monthlyFixedExpenses: [
         {
             category: 'Streaming',
@@ -213,12 +205,12 @@ export const instagramInfluencer: SpenderProfile = {
             category: 'Living',
             label: 'Phone bill',
             amount: 30,
-        },        
+        },
         {
             category: 'Living',
             label: 'Electricity',
             amount: 30,
-        },        
+        },
         {
             category: 'Living',
             label: 'Home insurance',
@@ -266,7 +258,6 @@ export const instagramInfluencer: SpenderProfile = {
 };
 
 export const businessPerson: SpenderProfile = {
-
     monthlyFixedExpenses: [
         {
             category: 'Streaming',
@@ -292,12 +283,12 @@ export const businessPerson: SpenderProfile = {
             category: 'Living',
             label: 'Phone bill',
             amount: 100,
-        },        
+        },
         {
             category: 'Living',
             label: 'Electricity',
             amount: 50,
-        },        
+        },
         {
             category: 'Living',
             label: 'Home insurance',

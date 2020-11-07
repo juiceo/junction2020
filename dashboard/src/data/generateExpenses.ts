@@ -24,6 +24,8 @@ export const generateExpenses = (
 
     console.log('salary per day', salaryPerDay);
 
+    const monthlyExpenseDates = {};
+
     while (startDate.isBefore(endDate)) {
         const { dailyRandomExpenses, monthlyRandomExpenses, monthlyFixedExpenses } = profile;
 
@@ -58,16 +60,14 @@ export const generateExpenses = (
             });
         }
 
-        if (startDate.day() === 15) {
-            monthlyFixedExpenses.forEach((expense) => {
-                result.push({
-                    timestamp: startDate.toISOString(),
-                    amount: (-1 * expense.amount).toFixed(2),
-                    category: expense.category,
-                    label: expense.label,
-                });
+        monthlyFixedExpenses.forEach((expense) => {
+            result.push({
+                timestamp: startDate.toISOString(),
+                amount: (-1 * expense.amount * (12 / 365)).toFixed(2),
+                category: expense.category,
+                label: expense.label,
             });
-        }
+        });
 
         startDate.add(1, 'day');
     }
