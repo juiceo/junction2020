@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import {
     Card,
     Container,
+    Paper,
     Box,
     Button,
     Grid,
@@ -23,15 +24,24 @@ const from = (_i: number) => ({ x: 0, rot: 0, scale: 1.5, y: -1000 })
 // This is being used down there in the view, it interpolates rotation and scale into a css transform
 const trans = (r: number, s: number) => `perspective(1500px) rotateZ(${r}deg) scale(${s})`
 
-
 function BetCard(props: {bet: Bet}) {
     const classes = useStyles()
-    return (<Grid>
+    return (<Paper>
         <div className={classes.image} style={{backgroundImage: `url(${props.bet.imageUrl})`}}>
         </div>
         <Typography variant="h5">{props.bet.title}</Typography>
         <p>{props.bet.body}</p>
-    </Grid>)
+        <Box display="flex" flexDirection="row" my={4}>
+          <Box flex={1} display="flex" flexDirection="column" alignItems="center" justifyContent="center">
+            <Typography variant="caption">Expected IRR</Typography>
+            <Typography variant="body1" className={classes.positive}>{(props.bet.expectedIrr * 100 - 100.0).toFixed(2)}%</Typography>
+          </Box>
+          <Box flex={1} display="flex" flexDirection="column" alignItems="center" justifyContent="center">
+            <Typography variant="caption">Cost</Typography>
+            <Typography variant="body1">{(props.bet.amount / 100).toFixed(2)}€</Typography>
+          </Box>
+        </Box>
+    </Paper>)
 }
 
 
@@ -72,54 +82,58 @@ export default function MakeBets() {
             config: { friction: 50, tension: down ? 800 : isGone ? 200 : 500 },
           }
         })
-        if (!down && gone.size === bets.length) {
-          setTimeout(() => void gone.clear() || set(i => to(i)), 600)
-        }
     })
     const AnimatedCard = animated(Card)
-    return (
-        <Container>
-            <Box p={2} className='content'>
-                <Typography variant="h3">YOLOBets™</Typography>
-                <Box p={2} className={classes.wrapper}>
-              {props.map(({x, y, rot, scale}, i) =>
-                (<animated.div key={i} style={{x, y}}>
-                  <AnimatedCard className={classes.card}
+
+    return (<Box>
+              <Typography variant="h3">YOLOBets™</Typography>
+              <Box className={classes.wrapper}>
+                {props.map(({x, y, rot, scale}, i) =>
+                  (<animated.div key={i} style={{x, y}}>
+                    <AnimatedCard className={classes.card}
                     {...bind(i)}
                     style={{
-                      transform: interpolate([rot, scale], trans)
-                      //backgroundImage: `url(${cards[i]})`,
+                    transform: interpolate([rot, scale], trans)
                     }}>
                     <BetCard bet={bets[i]} />
-                    </AnimatedCard>
-                </animated.div>
+                  </AnimatedCard>
+              </animated.div>
               ))}
-            </Box>
+              <div className={classes.out}>
+                  <Typography variant="body1">That's all the bets for now. Come back later for some more investment opportunities!</Typography>
+              </div>
+              </Box>
 
-            </Box>
-        </Container>
+          </Box>
     );
 };
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
         wrapper: {
-            paddingTop: theme.spacing(4)
+            paddingTop: theme.spacing(4),
+            width: '100%',
+            height: '500px',
+            position: 'relative'
         },
         card: {
             position: 'absolute',
             padding: '2rem',
             'will-change': 'transform',
-            display: 'flex',
-            'align-items': 'center',
-            'justify-content': 'center',
             boxShadow: '5px 5px 15px rgba(0, 0, 0, 0.5)',
-            color: 'white'
+            color: 'white',
         },
         image: {
-            width: '50vw',
-            height: '50vh',
+            width: '100%',
+            height: '250px',
             backgroundPosition: 'center'
+        },
+        positive: {
+            color: '#32cd32',
+        },
+        out: {
+          position: 'absolute',
+          zIndex: -100
         }
     })
 );

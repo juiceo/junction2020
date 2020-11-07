@@ -5,6 +5,7 @@ import { useParams } from 'react-router';
 import { meanBy, sumBy } from 'lodash';
 import classNames from 'classnames';
 import moment from 'moment';
+import MakeBets from './MakeBets';
 
 import DailyBalanceChart from '../components/DailyBalanceChart';
 import { DailyBalance, getBalanceByDay } from '../data/utils';
@@ -116,6 +117,9 @@ const Dashboard = (props: Props) => {
                                 runwayDays={runwayDays}
                             />
                         </Box>
+                        <Box mt={2}>
+                            <MakeBets />
+                        </Box>
                     </>
                 )}
             </Box>
@@ -134,7 +138,6 @@ const useStyles = makeStyles((theme: Theme) =>
         },
         content: {
             borderRadius: 4,
-            overflow: 'hidden',
             width: '100%',
             maxWidth: 800,
         },
