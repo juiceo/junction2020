@@ -1,0 +1,3 @@
+
+initdb: python create_db.py --bets bets.json --create
+
