@@ -19,6 +19,7 @@ import TrendingUpIcon from '@material-ui/icons/TrendingUp';
 import image from '../assets/investingfilter.png';
 
 interface Props {
+    monthlySurplus: number;
     onAccept: () => void;
     onSkip: () => void;
 }
@@ -39,8 +40,9 @@ const InvestmentOpportunity = (props: Props) => {
                     <Typography variant="body1">Invest your surplus</Typography>
                     <Typography variant="body2">
                         Don't let your surplus money sit on your spending account without accumulating any interest!
-                        With your spending habits, you could afford to invest <strong>400€/mo</strong> into various
-                        financial instruments. Here's how much money you are missing out on:
+                        With your spending habits, you could afford to invest{' '}
+                        <strong>{props.monthlySurplus}€/mo</strong> into various financial instruments. Here's how much
+                        money you are missing out on:
                     </Typography>
                     <List>
                         <ListItem>
@@ -48,8 +50,11 @@ const InvestmentOpportunity = (props: Props) => {
                                 primary="OMX Helsinki (+35.56%)"
                                 secondary={
                                     <Typography variant="body2">
-                                        You could make an extra <strong className={classes.money}>412,60€</strong> per
-                                        year
+                                        You could make an extra{' '}
+                                        <strong className={classes.money}>
+                                            {(props.monthlySurplus * 0.3656).toFixed(2)}€
+                                        </strong>{' '}
+                                        per year
                                     </Typography>
                                 }
                             />
@@ -62,8 +67,11 @@ const InvestmentOpportunity = (props: Props) => {
                                 primary="S&P 500 (+24.40%)"
                                 secondary={
                                     <Typography variant="body2">
-                                        You could make an extra <strong className={classes.money}>287,60€</strong> per
-                                        year
+                                        You could make an extra{' '}
+                                        <strong className={classes.money}>
+                                            {(props.monthlySurplus * 0.244).toFixed(2)}€
+                                        </strong>{' '}
+                                        per year
                                     </Typography>
                                 }
                             />
@@ -76,8 +84,11 @@ const InvestmentOpportunity = (props: Props) => {
                                 primary="OMX Helsinki (+22.30%)"
                                 secondary={
                                     <Typography variant="body2">
-                                        You could make an extra <strong className={classes.money}>260,10€</strong> per
-                                        year
+                                        You could make an extra{' '}
+                                        <strong className={classes.money}>
+                                            {(props.monthlySurplus * 0.223).toFixed(2)}€
+                                        </strong>{' '}
+                                        per year
                                     </Typography>
                                 }
                             />

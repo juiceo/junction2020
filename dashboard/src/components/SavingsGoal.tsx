@@ -46,16 +46,22 @@ const SavingsGoal = (props: Props) => {
                             <ListItemAvatar>
                                 <Avatar alt="Turkey" src="https://cdn.countryflags.com/thumbs/turkey/flag-800.png" />
                             </ListItemAvatar>
-                            <ListItemText primary="Alania, Turkey" secondary="5€ / day" />
+                            <ListItemText primary="Alanya, Turkey" secondary={`${(395 / 180).toFixed(2)}€ /day`} />
                             <ListItemSecondaryAction>
                                 <Button size="small">Set goal</Button>
                             </ListItemSecondaryAction>
                         </ListItem>
                         <ListItem>
                             <ListItemAvatar>
-                                <Avatar alt="Turkey" src="https://cdn.countryflags.com/thumbs/bulgaria/flag-400.png" />
+                                <Avatar
+                                    alt="Turkey"
+                                    src="https://cdn.countryflags.com/thumbs/netherlands/flag-800.png"
+                                />
                             </ListItemAvatar>
-                            <ListItemText primary="Sunny Beach, Bulgaria" secondary="3€ / day" />
+                            <ListItemText
+                                primary="Amsterdam, Netherlands"
+                                secondary={`${(261 / 180).toFixed(2)}€ /day`}
+                            />
                             <ListItemSecondaryAction>
                                 <Button size="small">Set goal</Button>
                             </ListItemSecondaryAction>
@@ -64,7 +70,7 @@ const SavingsGoal = (props: Props) => {
                             <ListItemAvatar>
                                 <Avatar alt="Estonia" src="https://cdn.countryflags.com/thumbs/estonia/flag-800.png" />
                             </ListItemAvatar>
-                            <ListItemText primary="Tallinn, Estonia" secondary="2€ / day" />
+                            <ListItemText primary="Tallinn, Estonia" secondary={`${(160 / 180).toFixed(2)}€ /day`} />
                             <ListItemSecondaryAction>
                                 <Button size="small">Set goal</Button>
                             </ListItemSecondaryAction>

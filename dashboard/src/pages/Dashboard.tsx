@@ -109,13 +109,12 @@ const Dashboard = (props: Props) => {
                                 </Box>
                             </Paper>
                         </Box>
-                        <Box p={5}>
-                            <Typography variant="body1" align="center">
-                                Oh-oh! You seem to be a bit strapped for cash - here's a few suggestions:
-                            </Typography>
-                        </Box>
                         <Box mt={2}>
-                            <Opportunities />
+                            <Opportunities
+                                averageDeficit={averageDeficit}
+                                totalDeficit={totalDeficit}
+                                runwayDays={runwayDays}
+                            />
                         </Box>
                     </>
                 )}
