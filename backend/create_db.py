@@ -1,17 +1,24 @@
 import sqlite3
 import datetime
+import argparse
 
-db = sqlite3.connect('./op.db', isolation_level='DEFERRED')
+parser = argparse.ArgumentParser()
+parser.add_argument('-N', type=int)
+parser.add_argument('--csv', type=str)
+flags = parser.parse_args()
 
-cursor = db.cursor()
+def create_database():
+    db = sqlite3.connect('./op.db', isolation_level='DEFERRED')
 
-with open('./schema.sql', 'rt') as f:
-    cursor.executescript(f.read())
+    cursor = db.cursor()
 
-db.commit()
+    with open('./schema.sql', 'rt') as f:
+        cursor.executescript(f.read())
 
-cursor.execute('''PRAGMA synchronous = EXTRA''')
-cursor.execute('''PRAGMA journal_mode = WAL''')
+    db.commit()
+
+    cursor.execute('''PRAGMA synchronous = EXTRA''')
+    cursor.execute('''PRAGMA journal_mode = WAL''')
 
 def date(string):
     return datetime.datetime.strptime(string, '%Y-%m-%d')
@@ -31,25 +38,34 @@ def parse_line(csv_line):
     csv_line[13] = int(csv_line[13])
     return csv_line
 
-with open('./synt_transactions_10M.csv', 'rt') as f:
-    f.readline()
-    i = 0
-    while True:
-        try:
-            line = f.readline()
-        except:
-            break
-        values = line.strip().split(';')
-        try:
-            line = parse_line(values)
-        except Exception as e:
-            continue
-        cursor.executemany("""INSERT INTO transactions(category, tstamp, arvo_pvm, kirjaus_pvm, maksu_pvm, tilinro, rahamaara, saldo, vientiselitekd, taplajikd, bic_saaja, viite, iban_saaja, counterparty_account_id)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? ,? ,?, ?)""", [line])
-        if i % 1000 == 0:
-            print(f"At record {i}", end='\r')
-            db.commit()
-        i += 1
+def add_transactions(db, filepath):
+    with open(filepath, 'rt') as f:
+        f.readline()
+        i = 0
+        while True:
+            if flags.N is not None and flags.N <= i:
+                break
+            try:
+                line = f.readline()
+            except:
+                break
+            values = line.strip().split(';')
+            try:
+                line = parse_line(values)
+            except Exception as e:
+                continue
+            cursor.executemany("""INSERT INTO transactions(category, tstamp, arvo_pvm, kirjaus_pvm, maksu_pvm, tilinro, rahamaara, saldo, vientiselitekd, taplajikd, bic_saaja, viite, iban_saaja, counterparty_account_id)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? ,? ,?, ?)""", [line])
+            if i % 1000 == 0:
+                print(f"At record {i}", end='\r')
+                db.commit()
+            i += 1
 
-db.commit()
+    db.commit()
+
+if __name__ == "__main__":
+    db = create_database()
+    if flags.csv is not None:
+        add_transactions(db, flags.csv)
+
 
