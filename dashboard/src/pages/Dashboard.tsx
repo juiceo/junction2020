@@ -12,7 +12,6 @@ const Dashboard = (props: Props) => {
     const classes = useStyles();
 
     const width = useWidth();
-    const constrainedWidth = Math.min(width, 800);
 
     return (
         <Box className={classes.wrapper}>

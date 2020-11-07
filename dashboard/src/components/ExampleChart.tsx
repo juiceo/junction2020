@@ -78,7 +78,7 @@ export default class Example extends PureComponent {
                     bottom: 0,
                 }}
             >
-                <CartesianGrid strokeDasharray="3 3" />
+                <CartesianGrid stroke="#f5f5f5" />
                 <XAxis dataKey="name" />
                 <YAxis />
                 <Tooltip />
