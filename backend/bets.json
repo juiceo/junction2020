@@ -1,0 +1,30 @@
+[
+    {
+        "title": "Wolt IPO",
+        "body": "This company is powering the millenial hustle providing entry-level jobs to desperate people. Get in on this deal and exploit workers instead of being exploited. No brainer.",
+        "expected_irr": "1.48",
+        "image_url": "https://images.unsplash.com/photo-1587740907822-f87cf0100f9b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=675&q=80",
+        "amount": 200000
+    },
+    {
+        "title": "Brewery stock offering",
+        "body": "Get in on the ground floor on this craft beer brewery. This could be the next BrewDog.",
+        "expected_irr": 1.15,
+        "image_url": "https://images.unsplash.com/photo-1559526642-c3f001ea68ee?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=967&q=80",
+        "amount": 80000
+    },
+    {
+        "title": "Trump will win the election, basically free money",
+        "body": "Veikkaus is offering free money at this point. 7.0 EUR odds for Trump winning. We all know he will. Place your bets.",
+        "image_url": "https://images.unsplash.com/photo-1580128660010-fd027e1e587a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=700&q=80",
+        "expected_irr": 100.0,
+        "amount": 10.0
+    },
+    {
+        "title": "/r/wallstreetbets hot deal $PLTR",
+        "body": "Everyone on wallstreet bets is raving about this newly listed stock, Palantir. You miss 100% of the shots you don't take. Bundle off 100 call options.",
+        "expected_irr": 2.0,
+        "amount": 150000,
+        "image_url": "https://images.unsplash.com/photo-1563986768711-b3bde3dc821e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1048&q=80"
+    }
+]
