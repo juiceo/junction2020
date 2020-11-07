@@ -1,8 +1,4 @@
-export type Category = 'Food' | 'Transport'| 'Travel'|'Sports'|'Living'|'Streaming'|'Entertainment'
-
-
-
-
+export type Category = 'Food' | 'Transport' | 'Travel' | 'Sports' | 'Living' | 'Streaming' | 'Entertainment';
 
 export type Expense = {
     label: string;

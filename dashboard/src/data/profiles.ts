@@ -1,7 +1,7 @@
-export type ExpenseCategory = 'Food' | 'Transport' | 'Entertainment';
+export type ExpenseCategory = 'Food' | 'Transport' | 'Travel' | 'Sports' | 'Living' | 'Streaming' | 'Entertainment';
 
 export type RandomExpense = {
-    category: string;
+    category: ExpenseCategory;
     label: string;
     min: number;
     max: number;
@@ -9,7 +9,7 @@ export type RandomExpense = {
 };
 
 export type FixedExpense = {
-    category: string;
+    category: ExpenseCategory;
     label: string;
     amount: number;
 };
@@ -50,7 +50,7 @@ export const student: SpenderProfile = {
             label: 'Movie tickets',
             min: 15,
             max: 20,
-            probability: 2,
+            probability: 1,
         },
     ],
     monthlyFixedExpenses: [
