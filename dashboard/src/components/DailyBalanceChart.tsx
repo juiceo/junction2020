@@ -10,6 +10,7 @@ import CloseIcon from '@material-ui/icons/Close';
 import CreditCardIcon from '@material-ui/icons/CreditCard';
 import { DailyBalance } from '../data/utils';
 import moment from 'moment';
+import { sortBy } from 'lodash';
 
 interface Props {
     data: DailyBalance[];
@@ -77,13 +78,18 @@ const DeficitChart = (props: Props) => {
         const item = data.find((item) => item.date === day);
 
         if (item) {
+            const salaryTransaction = item.transactions.find((t) => t.rahamaara > 0);
+            const salary = salaryTransaction.rahamaara;
             return (
                 <List>
-                    {item.transactions.map((transaction) => (
-                        <ListItem key={transaction.id} divider>
-                            <ListItemIcon>
-                                {transaction.rahamaara > 0 ? <AttachMoneyIcon /> : <AttachMoneyIcon />}
-                            </ListItemIcon>
+                    <ListItem key={salaryTransaction.id} divider className={classes.transactionItem}>
+                        <ListItemText primary={salary / 100 + '€'} secondary={salaryTransaction.label} />
+                    </ListItem>
+                    {sortBy(
+                        item.transactions.filter((t) => t.rahamaara < 0),
+                        (t) => t.rahamaara
+                    ).map((transaction) => (
+                        <ListItem key={transaction.id} divider className={classes.transactionItem}>
                             <ListItemText primary={transaction.rahamaara / 100 + '€'} secondary={transaction.label} />
                         </ListItem>
                     ))}
@@ -156,6 +162,28 @@ const useStyles = makeStyles((theme: Theme) =>
         },
         positive: {
             color: '#32cd32',
+        },
+        transactionItem: {
+            position: 'relative',
+        },
+        transactionBg: {
+            position: 'absolute',
+            right: 0,
+            top: 0,
+            bottom: 0,
+            width: '50%',
+            display: 'flex',
+            flexDirection: 'row',
+            alignItems: 'stretch',
+            justifyContent: 'flex-end',
+        },
+        transactionBgPositive: {
+            background: 'green',
+            width: '10px',
+        },
+        transactionBgNegative: {
+            background: 'red',
+            width: '10px',
         },
     })
 );
