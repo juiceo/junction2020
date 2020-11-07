@@ -2,6 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { Box, Typography, Paper } from '@material-ui/core';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import { useParams } from 'react-router';
+import { meanBy, sumBy } from 'lodash';
 import moment from 'moment';
 
 import DailyBalanceChart from '../components/DailyBalanceChart';
@@ -34,6 +35,9 @@ const Dashboard = (props: Props) => {
         fetchTransactions();
     }, [fetchTransactions]);
 
+    const averageDeficit = meanBy(data, 'balance');
+    const totalDeficit = sumBy(data, 'balance');
+
     return (
         <Box className={classes.wrapper}>
             <Box className={classes.content}>
@@ -51,6 +55,26 @@ const Dashboard = (props: Props) => {
                                 <DailyBalanceChart data={data} />
                             </Box>
                         </Paper>
+                        <Box mt={2} className={classes.highlights}>
+                            <Paper>
+                                <Box p={2} display="flex" alignItems="stretch" flexDirection="column">
+                                    <Typography variant="caption">Average deficit</Typography>
+                                    <Typography variant="body1">{averageDeficit.toFixed(2)}€ / day</Typography>
+                                </Box>
+                            </Paper>
+                            <Paper>
+                                <Box p={2} display="flex" alignItems="stretch" flexDirection="column">
+                                    <Typography variant="caption">Total savings / loss</Typography>
+                                    <Typography variant="body1">{totalDeficit.toFixed(2)}€</Typography>
+                                </Box>
+                            </Paper>
+                            <Paper>
+                                <Box p={2} display="flex" alignItems="stretch" flexDirection="column">
+                                    <Typography variant="caption">Runway left</Typography>
+                                    <Typography variant="body1">65 days</Typography>
+                                </Box>
+                            </Paper>
+                        </Box>
                         <Box mt={2}>
                             <Paper>
                                 <Box p={2}>
@@ -85,6 +109,11 @@ const useStyles = makeStyles((theme: Theme) =>
             overflow: 'hidden',
             width: '100%',
             maxWidth: 800,
+        },
+        highlights: {
+            display: 'grid',
+            gridTemplateColumns: '1fr 1fr 1fr',
+            gridColumnGap: theme.spacing(2),
         },
     })
 );
