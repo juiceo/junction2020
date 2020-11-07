@@ -1,5 +1,5 @@
-import { createMuiTheme, responsiveFontSizes } from '@material-ui/core/styles'
-import { PaletteColor } from '@material-ui/core/styles/createPalette'
+import { createMuiTheme, responsiveFontSizes } from '@material-ui/core/styles';
+import { PaletteColor } from '@material-ui/core/styles/createPalette';
 
 // declare module '@material-ui/core/styles/createPalette' {
 //     interface Palette {
@@ -13,17 +13,17 @@ const primary: PaletteColor = {
     light: '#ffa2ff',
     dark: '#a85aa8',
     contrastText: '#000000',
-}
+};
 
 const secondary: PaletteColor = {
     main: '#fc5185',
     light: '#ff86b4',
     dark: '#c40759',
     contrastText: '#000000',
-}
+};
 
-const titleFont: string = ['"Montserrat"', 'sans-serif'].join(',')
-const bodyFont: string = ['"Source Sans Pro"', 'sans-serif'].join(',')
+const titleFont: string = ['"Montserrat"', 'sans-serif'].join(',');
+const bodyFont: string = ['"Source Sans Pro"', 'sans-serif'].join(',');
 
 const theme = createMuiTheme({
     palette: {
@@ -81,6 +81,6 @@ const theme = createMuiTheme({
             fontSize: '1rem',
         },
     },
-})
+});
 
-export default responsiveFontSizes(theme)
+export default responsiveFontSizes(theme);
