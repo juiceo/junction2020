@@ -26,7 +26,8 @@ CREATE TABLE yolo_bets(
   body TEXT,
   amount INT,
   expected_irr FLOAT,
-  image_url TEXT
+  image_url TEXT,
+  taken BOOL
 );
 
 CREATE INDEX transaction_start_end ON transactions(tstamp);

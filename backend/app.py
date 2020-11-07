@@ -75,4 +75,12 @@ def get_bets():
     bets = YOLOBets.query.all()
     return flask.json.jsonify([t.serialize for t in bets])
 
+@app.route('/yolobets/<int:bet_id>', methods=['POST'])
+def take_bet(bet_id):
+    bet = YOLOBets.query.filter(YOLOBets.id == bet_id).first()
+    bet.taken = True
+    db.session.add(bet)
+    db.session.commit()
+    return flask.json.jsonify(bet.serialize)
+
 

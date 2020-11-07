@@ -46,6 +46,7 @@ class YOLOBets(db.Model):
     amount = db.Column(db.Integer())
     expected_irr = db.Column(db.Float())
     image_url = db.Column(db.Text())
+    taken = db.Column(db.Boolean(), default=False)
 
     @property
     def serialize(self):
@@ -55,6 +56,7 @@ class YOLOBets(db.Model):
                 'body': self.body,
                 'amount': self.amount,
                 'expected_irr': self.expected_irr,
-                'image_url': self.image_url
+                'image_url': self.image_url,
+                'taken': self.taken
                 }
 
