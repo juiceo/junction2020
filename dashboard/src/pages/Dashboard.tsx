@@ -5,7 +5,7 @@ import { useParams } from 'react-router';
 import moment from 'moment';
 
 import DailyBalanceChart from '../components/DailyBalanceChart';
-import { getBalanceByDay } from '../data/utils';
+import { DailyBalance, getBalanceByDay } from '../data/utils';
 import { generateExpenses } from '../data/generateExpenses';
 import { student } from '../data/profiles';
 
@@ -13,6 +13,7 @@ interface Props {}
 const Dashboard = (props: Props) => {
     const classes = useStyles();
     const [loading, setLoading] = useState<boolean>(true);
+    const [data, setData] = useState<DailyBalance[]>([]);
     const { accountNumber } = useParams<{ accountNumber: string }>();
 
     const fetchTransactions = useCallback(async () => {
@@ -21,7 +22,7 @@ const Dashboard = (props: Props) => {
         await fetch(url)
             .then((res) => res.json())
             .then((data) => {
-                console.log('DATA', data);
+                setData(getBalanceByDay(data));
             });
         setLoading(false);
     }, [accountNumber]);
@@ -29,14 +30,6 @@ const Dashboard = (props: Props) => {
     useEffect(() => {
         fetchTransactions();
     }, [fetchTransactions]);
-
-    const expenses = generateExpenses(
-        student,
-        moment().year(2020).startOf('year'),
-        moment().year(2020).startOf('year').add(1, 'month')
-    );
-
-    console.log('EXPENSES', expenses);
 
     return (
         <Box className={classes.wrapper}>
@@ -49,16 +42,12 @@ const Dashboard = (props: Props) => {
                         Loading
                     </Box>
                 ) : (
-                    <Box>Hello</Box>
+                    <Paper>
+                        <Box p={2}>
+                            <DailyBalanceChart data={data} />
+                        </Box>
+                    </Paper>
                 )}
-                {/* <Paper>
-                    <Box p={2}>
-                        <DailyBalanceChart data={getBalanceByDay(yearlySalary)} />
-                    </Box>
-                </Paper> */}
-                {/* <Box mt={2} className={classes.stats}>
-                    
-                </Box> */}
             </Box>
         </Box>
     );

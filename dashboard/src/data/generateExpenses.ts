@@ -15,19 +15,30 @@ export const getRandomAmount = (min: number, max: number): number => {
 
 export const generateExpenses = (
     profile: SpenderProfile,
+    salary: number,
     startDate: Moment = moment().year(2019).startOf('year'),
     endDate: Moment = moment()
 ): ExpenseTransaction[] => {
     const result: ExpenseTransaction[] = [];
+    const salaryPerDay = (salary * 12) / 365;
+
+    console.log('salary per day', salaryPerDay);
 
     while (startDate.isBefore(endDate)) {
         const { dailyRandomExpenses, monthlyRandomExpenses, monthlyFixedExpenses } = profile;
+
+        result.push({
+            timestamp: startDate.toISOString(),
+            amount: salaryPerDay.toFixed(2),
+            category: 'Salary',
+            label: 'Salary',
+        });
 
         dailyRandomExpenses.forEach((expense) => {
             if (expense.probability > Math.random()) {
                 result.push({
                     timestamp: startDate.toISOString(),
-                    amount: getRandomAmount(expense.min, expense.max).toFixed(2),
+                    amount: (-1 * getRandomAmount(expense.min, expense.max)).toFixed(2),
                     category: expense.category,
                     label: expense.label,
                 });
@@ -39,7 +50,7 @@ export const generateExpenses = (
                 if (expense.probability > Math.random()) {
                     result.push({
                         timestamp: startDate.toISOString(),
-                        amount: getRandomAmount(expense.min, expense.max).toFixed(2),
+                        amount: (-1 * getRandomAmount(expense.min, expense.max)).toFixed(2),
                         category: expense.category,
                         label: expense.label,
                     });
@@ -51,7 +62,7 @@ export const generateExpenses = (
             monthlyFixedExpenses.forEach((expense) => {
                 result.push({
                     timestamp: startDate.toISOString(),
-                    amount: expense.amount.toFixed(2),
+                    amount: (-1 * expense.amount).toFixed(2),
                     category: expense.category,
                     label: expense.label,
                 });

@@ -25,24 +25,20 @@ interface Props {}
 const CreateUser = (props: Props) => {
     const classes = useStyles();
     const [accountNo, setAccountNo] = useState<string>('');
+    const [salary, setSalary] = useState<string>('');
     const [profile, setProfile] = useState<string>('student');
     const [loading, setLoading] = useState<boolean>(false);
-
-    const expenses = generateExpenses(
-        student,
-        moment().year(2020).startOf('year'),
-        moment().year(2020).startOf('year').add(1, 'month')
-    );
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setProfile((event.target as HTMLInputElement).value);
     };
 
-    const getExpensesForProfile = (profile: string) => {
+    const getExpensesForProfile = (profile: string, salary: number) => {
         switch (profile) {
             case 'student': {
                 return generateExpenses(
                     student,
+                    salary,
                     moment().year(2020).startOf('year'),
                     moment().year(2020).startOf('year').add(1, 'month')
                 );
@@ -50,6 +46,7 @@ const CreateUser = (props: Props) => {
             case 'instagramInfluencer': {
                 return generateExpenses(
                     instagramInfluencer,
+                    salary,
                     moment().year(2020).startOf('year'),
                     moment().year(2020).startOf('year').add(1, 'month')
                 );
@@ -57,6 +54,7 @@ const CreateUser = (props: Props) => {
             case 'constructionWorker': {
                 return generateExpenses(
                     constructionWorker,
+                    salary,
                     moment().year(2020).startOf('year'),
                     moment().year(2020).startOf('year').add(1, 'month')
                 );
@@ -64,6 +62,7 @@ const CreateUser = (props: Props) => {
             case 'businessPerson': {
                 return generateExpenses(
                     businessPerson,
+                    salary,
                     moment().year(2020).startOf('year'),
                     moment().year(2020).startOf('year').add(1, 'month')
                 );
@@ -75,11 +74,11 @@ const CreateUser = (props: Props) => {
 
     const handleCreateUser = async () => {
         setLoading(true);
-        const expenses = getExpensesForProfile(profile);
+        const expenses = getExpensesForProfile(profile, Number(salary));
         const transactions = expenses.map((expense) => {
             return {
                 accountno: accountNo.toString(),
-                amount: Number(expense.amount) * -1,
+                amount: Number(expense.amount),
                 tstamp: moment(expense.timestamp).format('YYYY-MM-DD'),
                 category: expense.category,
                 label: expense.label,
@@ -122,6 +121,15 @@ const CreateUser = (props: Props) => {
                                 variant="outlined"
                                 value={accountNo}
                                 onChange={(e) => setAccountNo(e.target.value as string)}
+                                type="number"
+                            />
+                            <Box mt={3} />
+                            <TextField
+                                fullWidth
+                                label="Salary per month"
+                                variant="outlined"
+                                value={salary}
+                                onChange={(e) => setSalary(e.target.value as string)}
                                 type="number"
                             />
                             <Box mt={3} />

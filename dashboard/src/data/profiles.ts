@@ -1,4 +1,12 @@
-export type ExpenseCategory = 'Food' | 'Transport' | 'Travel' | 'Sports' | 'Living' | 'Streaming' | 'Entertainment';
+export type ExpenseCategory =
+    | 'Food'
+    | 'Transport'
+    | 'Travel'
+    | 'Sports'
+    | 'Living'
+    | 'Streaming'
+    | 'Entertainment'
+    | 'Salary';
 
 export type RandomExpense = {
     category: ExpenseCategory;
@@ -72,8 +80,6 @@ export const student: SpenderProfile = {
     ],
 };
 
-
-
 export const constructionWorker: SpenderProfile = {
     dailyRandomExpenses: [
         {
@@ -86,8 +92,8 @@ export const constructionWorker: SpenderProfile = {
         {
             category: 'Food',
             label: 'Lunch',
-            min: 10.70,
-            max: 10.70,
+            min: 10.7,
+            max: 10.7,
             probability: 1,
         },
         {
@@ -145,10 +151,8 @@ export const constructionWorker: SpenderProfile = {
     ],
 };
 
-
 export const instagramInfluencer: SpenderProfile = {
     dailyRandomExpenses: [
-
         {
             category: 'Food',
             label: 'Lunch',
@@ -199,11 +203,8 @@ export const instagramInfluencer: SpenderProfile = {
     ],
 };
 
-
-
 export const businessPerson: SpenderProfile = {
     dailyRandomExpenses: [
-
         {
             category: 'Food',
             label: 'Lunch',
