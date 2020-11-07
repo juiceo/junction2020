@@ -1,7 +1,7 @@
 from datetime import datetime
 import flask
 from flask import Flask, g, request
-from model import Transaction
+from model import Transaction, YOLOBets
 from init import app, db
 import random
 
@@ -72,6 +72,15 @@ def add_transactions(account):
 
 @app.route('/yolobets', methods=['GET'])
 def get_bets():
-    pass
+    bets = YOLOBets.query.all()
+    return flask.json.jsonify([t.serialize for t in bets])
+
+@app.route('/yolobets/<int:bet_id>', methods=['POST'])
+def take_bet(bet_id):
+    bet = YOLOBets.query.filter(YOLOBets.id == bet_id).first()
+    bet.taken = True
+    db.session.add(bet)
+    db.session.commit()
+    return flask.json.jsonify(bet.serialize)
 
 

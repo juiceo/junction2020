@@ -1,8 +1,7 @@
 from flask_sqlalchemy import SQLAlchemy
 from init import db
-from flask_serialize import FlaskSerializeMixin
 
-class Transaction(db.Model, FlaskSerializeMixin):
+class Transaction(db.Model):
     __tablename__ = "transactions"
     id = db.Column(db.Integer(), primary_key=True)
     category = db.Column(db.Text())
@@ -38,3 +37,26 @@ class Transaction(db.Model, FlaskSerializeMixin):
                 'iban_saaja': self.iban_saaja,
                 'counterparty_account_id': self.counterparty_account_id
                 }
+
+class YOLOBets(db.Model):
+    __tablename__ = "yolo_bets"
+    id = db.Column(db.Integer(), primary_key=True)
+    title = db.Column(db.Text())
+    body = db.Column(db.Text())
+    amount = db.Column(db.Integer())
+    expected_irr = db.Column(db.Float())
+    image_url = db.Column(db.Text())
+    taken = db.Column(db.Boolean(), default=False)
+
+    @property
+    def serialize(self):
+        return {
+                'id': self.id,
+                'title': self.title,
+                'body': self.body,
+                'amount': self.amount,
+                'expected_irr': self.expected_irr,
+                'image_url': self.image_url,
+                'taken': self.taken
+                }
+
