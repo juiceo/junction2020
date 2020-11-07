@@ -17,8 +17,8 @@ Means offers you a simple dashboard for seeing your finances at a glance - it:
 
 Demo: 
 
-- [Account 1](https://means-app.herokuapp.com/dashboard/799428222199717) (spending too much compared to income)
-- [Account 2](https://means-app.herokuapp.com/dashboard/447934179520357) (accumulates extra money)
+- [Account 1](https://means-app.herokuapp.com/dashboard/7994282221997100) (spending too much compared to income)
+- [Account 2](https://means-app.herokuapp.com/dashboard/447934179520357) (accumulates surplus money)
 
 
 This project was made at Junction 2020.
