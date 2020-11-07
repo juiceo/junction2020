@@ -12,13 +12,6 @@ def to_date(datestring):
     return datetime.strptime(datestring, TIME_FORMAT)
 
 
-@app.after_request
-def after(response):
-    response.headers['Access-Control-Allow-Origin'] = '*'
-    response.headers['Access-Control-Allow-Headers'] = '*'
-    return response
-
-
 @app.route('/')
 def index():
     """
