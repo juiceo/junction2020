@@ -27,3 +27,4 @@ jobs:
                   workingDirectory: 'dashboard'
               env:
                   CF_ACCOUNT_ID: ${{secrets.CF_ACCOUNT_ID}}
+                  USER: root
