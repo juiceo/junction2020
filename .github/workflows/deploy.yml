@@ -16,8 +16,6 @@ jobs:
               with:
                   node-version: '12.x'
             - run: cd dashboard && npm install
-              with:
-                  workingDirectory: 'dashboard'
             - run: cd dashboard && npm run build --if-present
               env:
                   CI: false
