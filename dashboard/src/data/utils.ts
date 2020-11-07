@@ -1,11 +1,12 @@
 import transactions from './transactions.json';
-import { groupBy, sumBy, minBy, maxBy, pick, sortBy } from 'lodash';
+import { groupBy, sumBy, minBy, maxBy, pick, sortBy, meanBy } from 'lodash';
 import moment from 'moment';
 
 export interface DailyBalance {
     date: string;
     balance: number;
     accumulatedBalance: number;
+    rollingAverage: number;
 }
 
 export interface ChartValue {
@@ -22,11 +23,14 @@ export const getBalanceByDay = (transactions: any[]) => {
         const transactions = transactionsByDay[date];
         const dailySum = sumBy(transactions, (t) => Number(t.rahamaara));
 
-        result.push({
+        const item = {
             date,
             balance: dailySum / 100,
             accumulatedBalance: currentBalance + dailySum / 100,
-        });
+            rollingAverage: meanBy(result.slice(index - 30, index), 'balance'),
+        };
+
+        result.push(item);
 
         return result;
     }, [] as DailyBalance[]);

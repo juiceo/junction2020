@@ -14,17 +14,16 @@ import {
 } from '@material-ui/core';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import moment from 'moment';
+import { useHistory } from 'react-router';
 
-import DailyBalanceChart from '../components/DailyBalanceChart';
-import { getBalanceByDay } from '../data/utils';
 import { generateExpenses } from '../data/generateExpenses';
-import { SpenderProfile } from '../data/profiles';
 import { student, instagramInfluencer, businessPerson, constructionWorker } from '../data/profiles';
 
 interface Props {}
 const CreateUser = (props: Props) => {
     const classes = useStyles();
-    const [accountNo, setAccountNo] = useState<string>('');
+    const history = useHistory();
+    const [accountNo, setAccountNo] = useState<string>(Math.floor(Math.random() * 1000000000000000).toString());
     const [salary, setSalary] = useState<string>('');
     const [profile, setProfile] = useState<string>('student');
     const [loading, setLoading] = useState<boolean>(false);
@@ -36,36 +35,16 @@ const CreateUser = (props: Props) => {
     const getExpensesForProfile = (profile: string, salary: number) => {
         switch (profile) {
             case 'student': {
-                return generateExpenses(
-                    student,
-                    salary,
-                    moment().year(2020).startOf('year'),
-                    moment().year(2020).startOf('year').add(1, 'month')
-                );
+                return generateExpenses(student, salary, moment().year(2020).startOf('year'), moment());
             }
             case 'instagramInfluencer': {
-                return generateExpenses(
-                    instagramInfluencer,
-                    salary,
-                    moment().year(2020).startOf('year'),
-                    moment().year(2020).startOf('year').add(1, 'month')
-                );
+                return generateExpenses(instagramInfluencer, salary, moment().year(2020).startOf('year'), moment());
             }
             case 'constructionWorker': {
-                return generateExpenses(
-                    constructionWorker,
-                    salary,
-                    moment().year(2020).startOf('year'),
-                    moment().year(2020).startOf('year').add(1, 'month')
-                );
+                return generateExpenses(constructionWorker, salary, moment().year(2020).startOf('year'), moment());
             }
             case 'businessPerson': {
-                return generateExpenses(
-                    businessPerson,
-                    salary,
-                    moment().year(2020).startOf('year'),
-                    moment().year(2020).startOf('year').add(1, 'month')
-                );
+                return generateExpenses(businessPerson, salary, moment().year(2020).startOf('year'), moment());
             }
             default:
                 return [];
@@ -96,6 +75,7 @@ const CreateUser = (props: Props) => {
             await fetch(`http://localhost:5000/account/${accountNo}/transactions`, options)
                 .then((res) => res.json())
                 .then((res) => console.log(res));
+            history.push('/dashboard/' + accountNo);
         } catch (err) {
             window.alert(`Error: ${err.message}`);
         } finally {

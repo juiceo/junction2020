@@ -17,8 +17,8 @@ const DeficitChart = (props: Props) => {
     const classes = useStyles();
 
     const gradientOffset = () => {
-        const dataMax = Math.max(...data.map((i) => i.accumulatedBalance));
-        const dataMin = Math.min(...data.map((i) => i.accumulatedBalance));
+        const dataMax = Math.max(...data.map((i) => i.rollingAverage));
+        const dataMin = Math.min(...data.map((i) => i.rollingAverage));
 
         if (dataMax <= 0) {
             return 0;
@@ -38,11 +38,11 @@ const DeficitChart = (props: Props) => {
             console.log('PAYLOAD', payload);
             const date = moment(label).format('MMM Do YYYY');
             const balance = payload[0].payload.balance;
-            const accumulated = payload[0].payload.accumulatedBalance;
+            const rollingAverage = payload[0].payload.rollingAverage;
             return (
                 <Box className={classes.tooltip}>
                     <Typography variant="caption">{date}</Typography>
-                    <Typography variant="body1">{accumulated.toFixed(2)}€</Typography>
+                    <Typography variant="body1">{rollingAverage.toFixed(2)}€</Typography>
                     <Typography variant="body2" className={classNames()}>
                         {balance.toFixed(2)}
                     </Typography>
@@ -76,7 +76,7 @@ const DeficitChart = (props: Props) => {
                             <stop offset={off} stopColor="red" stopOpacity={1} />
                         </linearGradient>
                     </defs>
-                    <Area type="monotone" dataKey="accumulatedBalance" stroke="#000" fill="url(#splitColor)" />
+                    <Area type="monotone" dataKey="rollingAverage" stroke="#000" fill="url(#splitColor)" />
                 </AreaChart>
             </ResponsiveContainer>
         </div>
