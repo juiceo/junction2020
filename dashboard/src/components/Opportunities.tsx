@@ -8,6 +8,8 @@ import ExpenseWarning from './ExpenseWarning';
 import CircularEconomy from './CircularEconomy';
 import SalaryAlert from './SalaryAlert';
 import SavingsGoal from './SavingsGoal';
+import DoneCard from './DoneCard';
+import InvestmentOpportunity from './InvestmentOpportunity';
 
 interface Props {}
 const Opportunities = (props: Props) => {
@@ -17,6 +19,9 @@ const Opportunities = (props: Props) => {
     return (
         <Box m={-2}>
             <SwipeableViews index={index}>
+                <Box p={2}>
+                    <InvestmentOpportunity onSkip={() => setIndex((prev) => prev + 1)} onAccept={() => {}} />
+                </Box>
                 <Box p={2}>
                     <SavingsGoal onSkip={() => setIndex((prev) => prev + 1)} onAccept={() => {}} />
                 </Box>
@@ -33,6 +38,9 @@ const Opportunities = (props: Props) => {
                 </Box>
                 <Box p={2}>
                     <CircularEconomy onSkip={() => setIndex((prev) => prev + 1)} onAccept={() => {}} />
+                </Box>
+                <Box p={2}>
+                    <DoneCard />
                 </Box>
             </SwipeableViews>
         </Box>

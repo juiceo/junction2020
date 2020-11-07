@@ -18,10 +18,10 @@ const ExpenseWarning = (props: Props) => {
                 <Box className={classes.tag} mb={3}>
                     <WhatshotIcon /> <Box mr={1} /> You're burning money!
                 </Box>
-                <Typography variant="body1">Eat at home more often</Typography>
+                <Typography variant="body1">Limit your streaming services</Typography>
                 <Typography variant="body2">
-                    You are spending a lot on eating out! Here's your spending compared to the average in your income
-                    bracket:{' '}
+                    You are spending a lot more than average on streaming services! Maybe you don't need to have them
+                    all? Here's your spending compared to the average in your income bracket:{' '}
                 </Typography>
                 <Box display="flex" flexDirection="row" my={4}>
                     <Box
@@ -32,11 +32,11 @@ const ExpenseWarning = (props: Props) => {
                         alignItems="center"
                         justifyContent="center"
                     >
-                        <Typography variant="h3">1235,90€</Typography>
+                        <Typography variant="h3">124,90€</Typography>
                         <Typography variant="body1">You</Typography>
                     </Box>
                     <Box flex={1} display="flex" flexDirection="column" alignItems="center" justifyContent="center">
-                        <Typography variant="h3">675,09€</Typography>
+                        <Typography variant="h3">34,50€</Typography>
                         <Typography variant="body1">Average</Typography>
                     </Box>
                 </Box>
