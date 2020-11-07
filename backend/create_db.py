@@ -1,10 +1,13 @@
 import sqlite3
 import datetime
 import argparse
+import json
 
 parser = argparse.ArgumentParser()
 parser.add_argument('-N', type=int)
 parser.add_argument('--csv', type=str)
+parser.add_argument('--create', action='store_true', help="Will drop tables, if they exists and create the database from scratch.")
+parser.add_argument('--bets', type=str, help="Path to json file containing yolo bets to load into the database.")
 flags = parser.parse_args()
 
 def create_database():
@@ -19,6 +22,7 @@ def create_database():
 
     cursor.execute('''PRAGMA synchronous = EXTRA''')
     cursor.execute('''PRAGMA journal_mode = WAL''')
+    return db
 
 def date(string):
     return datetime.datetime.strptime(string, '%Y-%m-%d')
@@ -39,6 +43,7 @@ def parse_line(csv_line):
     return csv_line
 
 def add_transactions(db, filepath):
+    cursor = db.cursor()
     with open(filepath, 'rt') as f:
         f.readline()
         i = 0
@@ -63,9 +68,26 @@ def add_transactions(db, filepath):
 
     db.commit()
 
+def load_bets(db, bet_file):
+    with open(bet_file, 'rt') as f:
+        bets = json.loads(f.read())
+
+    cursor = db.cursor()
+    for bet in bets:
+        cursor.execute("""
+        INSERT INTO yolo_bets(title, body, amount, expected_irr, image_url) VALUES (?, ?, ?, ?, ?);
+        """, (bet['title'], bet['body'], bet['amount'], bet['expected_irr'], bet['image_url']))
+    db.commit()
+
 if __name__ == "__main__":
-    db = create_database()
+    if flags.create:
+        db = create_database()
+    else:
+        db = sqlite3.connect('./op.db')
     if flags.csv is not None:
         add_transactions(db, flags.csv)
+    if flags.bets is not None:
+        load_bets(db, flags.bets)
+
 
 
