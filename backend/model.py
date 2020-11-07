@@ -23,6 +23,7 @@ class Transaction(db.Model):
     @property
     def serialize(self):
         return {'id': self.id,
+                'category': self.category,
                 'tstamp': self.tstamp,
                 'arvo_pvm': self.arvo_pvm,
                 'kirjaus_pvm': self.kirjaus_pvm,
@@ -30,6 +31,7 @@ class Transaction(db.Model):
                 'tilinro': self.tilinro,
                 'rahamaara': self.rahamaara,
                 'saldo': self.saldo,
+                'label': self.label,
                 'vientiselitekd': self.vientiselitekd,
                 'taplajikd': self.taplajikd,
                 'bic_saaja': self.bic_saaja,
