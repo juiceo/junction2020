@@ -6,12 +6,18 @@ import DailyBalanceChart from '../components/DailyBalanceChart';
 import ExampleChart from '../components/ExampleChart';
 import { useWidth } from '../hooks/useWidth';
 import { getBalanceByDay } from '../data/utils';
+import { generateExpenses } from '../data/generateExpenses';
+import { student } from '../data/profiles';
 
 interface Props {}
 const Dashboard = (props: Props) => {
     const classes = useStyles();
 
     const yearlySalary = 100_000;
+
+    const expenses = generateExpenses(student);
+
+    console.log('EXPENSES', expenses);
 
     return (
         <Box className={classes.wrapper}>

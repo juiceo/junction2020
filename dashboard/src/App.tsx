@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { Box } from '@material-ui/core';
 
 import Dashboard from './pages/Dashboard';
+import Generate from './pages/Generate';
 
 function App() {
     return (
@@ -11,6 +12,7 @@ function App() {
             <Router>
                 <Switch>
                     <Route exact path="/" component={Dashboard} />
+                    <Route exact path="/generate" component={Generate} />
                 </Switch>
             </Router>
         </Box>
