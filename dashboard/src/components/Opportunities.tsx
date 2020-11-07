@@ -5,6 +5,7 @@ import SwipeableViews from 'react-swipeable-views';
 
 import OpportunityCard from './OpportunityCard';
 import ExpenseWarning from './ExpenseWarning';
+import CircularEconomy from './CircularEconomy';
 
 interface Props {}
 const Opportunities = (props: Props) => {
@@ -18,10 +19,7 @@ const Opportunities = (props: Props) => {
                     <ExpenseWarning onSkip={() => setIndex((prev) => prev + 1)} onAccept={() => {}} />
                 </Box>
                 <Box p={2}>
-                    <ExpenseWarning onSkip={() => setIndex((prev) => prev + 1)} onAccept={() => {}} />
-                </Box>
-                <Box p={2}>
-                    <ExpenseWarning onSkip={() => setIndex((prev) => prev + 1)} onAccept={() => {}} />
+                    <CircularEconomy onSkip={() => setIndex((prev) => prev + 1)} onAccept={() => {}} />
                 </Box>
             </SwipeableViews>
         </Box>
