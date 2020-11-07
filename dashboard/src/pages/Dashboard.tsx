@@ -11,11 +11,11 @@ interface Props {}
 const Dashboard = (props: Props) => {
     const classes = useStyles();
 
-    const width = useWidth();
+    const yearlySalary = 100_000;
 
     return (
         <Box className={classes.wrapper}>
-            <DailyBalanceChart data={getBalanceByDay()} />
+            <DailyBalanceChart data={getBalanceByDay(yearlySalary)} />
         </Box>
     );
 };

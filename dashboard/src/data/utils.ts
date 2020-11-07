@@ -1,5 +1,5 @@
 import transactions from './transactions.json';
-import { groupBy, sumBy, minBy } from 'lodash';
+import { groupBy, sumBy, minBy, maxBy, pick, sortBy } from 'lodash';
 import moment from 'moment';
 
 export interface DailyBalance {
@@ -13,11 +13,12 @@ export interface ChartValue {
     value: number;
 }
 
-export const getBalanceByDay = () => {
-    const transactionsByDay = groupBy(transactions, 'bookdate');
+export const getBalanceByDay = (yearlySalary: number) => {
+    const dataWithSalary = getDataWithMonthlySalary(transactions, yearlySalary);
+    const transactionsByDay = groupBy(dataWithSalary, 'bookdate');
     const days = Object.keys(transactionsByDay);
     const dates = days.map((day) => moment(day, 'DD/MM/YYYY').toISOString());
-    const sorted = dates.sort();
+    const sorted = sortBy(dates, (date) => moment(date).valueOf());
 
     return sorted.reduce((result, date, index) => {
         const day = moment(date).format('DD/MM/YYYY');
@@ -35,23 +36,34 @@ export const getBalanceByDay = () => {
     }, [] as DailyBalance[]);
 };
 
-export const getDataWithMonthlySalary = (transactions: any[]) => {
-    const startDate = minBy(transactions, (t) => moment(t.bookdate).unix());
-    const endDate = maxBy(transactions, (t) => moment(t.bookdate).unix());
-    //     {
-    //     "accountno": "3",
-    //     "amount": "-18.87",
-    //     "bic_receiver": "           ",
-    //     "bookdate": "18/11/2019",
-    //     "counterparty_account_id": "155",
-    //     "iban_receiver": "1",
-    //     "paymentdate": "18/11/2019",
-    //     "reference": "1",
-    //     "saldo": "26417.06",
-    //     "taplajikd": "162",
-    //     "tstamp": "2019-11-18 20:07:44.516129010",
-    //     "valuedate": "18/11/2019",
-    //     "vientiselitekd": "0",
-    //     "﻿category": "Shoppailu"
-    // },
+export const getDataWithMonthlySalary = (transactions: any[], yearlySalary: number) => {
+    const dailySalary = yearlySalary / 365;
+    const base = pick(transactions[0], ['accountno', 'bix_receiver', 'counterparty_account_id', 'iban_receiver']);
+    const startDate = minBy(transactions, (t) => moment(t.bookdate, 'DD/MM/YYYY').unix()).bookdate;
+    const endDate = maxBy(transactions, (t) => moment(t.bookdate, 'DD/MM/YYYY').unix()).bookdate;
+
+    const current = moment(startDate, 'DD/MM/YYYY').startOf('month');
+    const end = moment(endDate, 'DD/MM/YYYY').endOf('month');
+
+    const result: any[] = [];
+
+    while (current.isBefore(end)) {
+        result.push({
+            ...base,
+            amount: dailySalary.toFixed(2),
+            bookdate: current.format('DD/MM/YYYY'),
+            paymentdate: current.format('DD/MM/YYYY'),
+            reference: '0',
+            saldo: 0,
+            taplajikd: '588',
+            tstamp: '2019-11-28 09:17:25.161290280',
+            valuedate: current.format('DD/MM/YYYY'),
+            vientiselitekd: '710',
+            category: 'Tulot',
+        });
+
+        current.add(1, 'day');
+    }
+
+    return [...transactions, ...result];
 };
