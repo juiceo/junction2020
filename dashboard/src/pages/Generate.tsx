@@ -35,6 +35,15 @@ const Generate = (props: Props) => {
             <Button color="primary" variant="contained" onClick={() => handleGenerateExpenses(student)}>
                 Student
             </Button>
+            <Button color="primary" variant="contained" onClick={() => handleGenerateExpenses(student)}>
+                Profile 2
+            </Button>
+            <Button color="primary" variant="contained" onClick={() => handleGenerateExpenses(student)}>
+                Profile 3
+            </Button>
+            <Button color="primary" variant="contained" onClick={() => handleGenerateExpenses(student)}>
+                Profile 4
+            </Button>
             <Box p={2}>
                 {Object.keys(expensesByMonth).map((month) => {
                     const expenses = expensesByMonth[month];
