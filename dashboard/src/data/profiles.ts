@@ -60,7 +60,7 @@ export const student: SpenderProfile = {
             amount: 60,
         },
         {
-            category: 'Sport',
+            category: 'Sports',
             label: 'Gym membership',
             amount: 60,
         },
