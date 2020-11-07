@@ -1,3 +1,4 @@
 
 initdb: python create_db.py --bets bets.json --create
+web: gunicorn wsgi:app
 
