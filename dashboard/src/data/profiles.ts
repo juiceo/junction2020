@@ -29,6 +29,47 @@ export type SpenderProfile = {
 };
 
 export const student: SpenderProfile = {
+
+    monthlyFixedExpenses: [
+        {
+            category: 'Transport',
+            label: 'Public transport ticket',
+            amount: 60,
+        },
+        {
+            category: 'Sports',
+            label: 'Gym membership',
+            amount: 60,
+        },
+        {
+            category: 'Living',
+            label: 'Rent',
+            amount: 250,
+        },
+        {
+            category: 'Living',
+            label: 'Phone bill',
+            amount: 30,
+        },        
+        {
+            category: 'Living',
+            label: 'Electricity',
+            amount: 30,
+        },        
+        {
+            category: 'Living',
+            label: 'Home insurance',
+            amount: 20,
+        },
+        {
+            category: 'Living',
+            label: 'Internet',
+            amount: 30,
+        },
+        
+    ],
+
+
     dailyRandomExpenses: [
         {
             category: 'Food',
@@ -61,6 +102,11 @@ export const student: SpenderProfile = {
             probability: 1,
         },
     ],
+
+};
+
+export const constructionWorker: SpenderProfile = {
+
     monthlyFixedExpenses: [
         {
             category: 'Transport',
@@ -68,19 +114,34 @@ export const student: SpenderProfile = {
             amount: 60,
         },
         {
-            category: 'Sports',
-            label: 'Gym membership',
-            amount: 60,
+            category: 'Living',
+            label: 'Rent',
+            amount: 1000,
         },
         {
             category: 'Living',
-            label: 'Rent',
-            amount: 250,
+            label: 'Phone bill',
+            amount: 30,
+        },        
+        {
+            category: 'Living',
+            label: 'Electricity',
+            amount: 30,
+        },        
+        {
+            category: 'Living',
+            label: 'Home insurance',
+            amount: 30,
         },
-    ],
-};
+        {
+            category: 'Living',
+            label: 'Internet',
+            amount: 30,
+        },
 
-export const constructionWorker: SpenderProfile = {
+    ],
+
+    
     dailyRandomExpenses: [
         {
             category: 'Food',
@@ -111,6 +172,7 @@ export const constructionWorker: SpenderProfile = {
             probability: 0.05,
         },
     ],
+
     monthlyRandomExpenses: [
         {
             category: 'Travel',
@@ -127,31 +189,48 @@ export const constructionWorker: SpenderProfile = {
             probability: 0.2,
         },
     ],
+};
+
+export const instagramInfluencer: SpenderProfile = {
+
     monthlyFixedExpenses: [
         {
-            category: 'Transport',
-            label: 'Public transport ticket',
-            amount: 60,
+            category: 'Streaming',
+            label: 'Spotify',
+            amount: 10,
         },
         {
-            category: 'Living',
-            label: 'Electricity',
-            amount: 30,
-        },
-        {
-            category: 'Living',
-            label: 'Home insurance',
-            amount: 20,
+            category: 'Streaming',
+            label: 'Netflix',
+            amount: 15,
         },
         {
             category: 'Living',
             label: 'Rent',
-            amount: 1000,
+            amount: 800,
+        },
+        {
+            category: 'Living',
+            label: 'Phone bill',
+            amount: 30,
+        },        
+        {
+            category: 'Living',
+            label: 'Electricity',
+            amount: 30,
+        },        
+        {
+            category: 'Living',
+            label: 'Home insurance',
+            amount: 30,
+        },
+        {
+            category: 'Living',
+            label: 'Internet',
+            amount: 30,
         },
     ],
-};
 
-export const instagramInfluencer: SpenderProfile = {
     dailyRandomExpenses: [
         {
             category: 'Food',
@@ -184,6 +263,10 @@ export const instagramInfluencer: SpenderProfile = {
             probability: 1,
         },
     ],
+};
+
+export const businessPerson: SpenderProfile = {
+
     monthlyFixedExpenses: [
         {
             category: 'Streaming',
@@ -197,13 +280,36 @@ export const instagramInfluencer: SpenderProfile = {
         },
         {
             category: 'Living',
+            label: 'Phone bill',
+            amount: 50,
+        },
+        {
+            category: 'Living',
             label: 'Rent',
-            amount: 800,
+            amount: 2500,
+        },
+        {
+            category: 'Living',
+            label: 'Phone bill',
+            amount: 100,
+        },        
+        {
+            category: 'Living',
+            label: 'Electricity',
+            amount: 50,
+        },        
+        {
+            category: 'Living',
+            label: 'Home insurance',
+            amount: 60,
+        },
+        {
+            category: 'Living',
+            label: 'Internet',
+            amount: 50,
         },
     ],
-};
 
-export const businessPerson: SpenderProfile = {
     dailyRandomExpenses: [
         {
             category: 'Food',
@@ -248,23 +354,6 @@ export const businessPerson: SpenderProfile = {
             min: 500,
             max: 2000,
             probability: 0.4,
-        },
-    ],
-    monthlyFixedExpenses: [
-        {
-            category: 'Streaming',
-            label: 'Spotify',
-            amount: 10,
-        },
-        {
-            category: 'Streaming',
-            label: 'Netflix',
-            amount: 15,
-        },
-        {
-            category: 'Living',
-            label: 'Phone bill',
-            amount: 50,
         },
     ],
 };
