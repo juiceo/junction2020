@@ -8,6 +8,9 @@ import DailyBalanceChart from '../components/DailyBalanceChart';
 import { DailyBalance, getBalanceByDay } from '../data/utils';
 import { generateExpenses } from '../data/generateExpenses';
 import { student } from '../data/profiles';
+import WhatshotIcon from '@material-ui/icons/Whatshot';
+
+import img1 from '../assets/erotic-painting.png';
 
 interface Props {}
 const Dashboard = (props: Props) => {
@@ -42,11 +45,27 @@ const Dashboard = (props: Props) => {
                         Loading
                     </Box>
                 ) : (
-                    <Paper>
-                        <Box p={2}>
-                            <DailyBalanceChart data={data} />
+                    <>
+                        <Paper>
+                            <Box p={2}>
+                                <DailyBalanceChart data={data} />
+                            </Box>
+                        </Paper>
+                        <Box mt={2}>
+                            <Paper>
+                                <Box p={2}>
+                                    <Typography variant="body1">
+                                        <WhatshotIcon /> Opportunity
+                                    </Typography>
+                                    <Typography variant="body2">
+                                        Make music for porn movies! On average you would need to do this for{' '}
+                                        <strong>2.5hrs per week</strong> to get back to even!
+                                    </Typography>
+                                </Box>
+                                <img src={img1} width="100%" height="300" alt="" style={{ objectFit: 'cover' }} />
+                            </Paper>
                         </Box>
-                    </Paper>
+                    </>
                 )}
             </Box>
         </Box>
