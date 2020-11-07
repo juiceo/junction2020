@@ -5,6 +5,7 @@ from flask_serialize import FlaskSerializeMixin
 class Transaction(db.Model, FlaskSerializeMixin):
     __tablename__ = "transactions"
     id = db.Column(db.Integer(), primary_key=True)
+    category = db.Column(db.Text())
     tstamp = db.Column(db.DateTime())
     arvo_pvm = db.Column(db.DateTime())
     kirjaus_pvm = db.Column(db.DateTime())

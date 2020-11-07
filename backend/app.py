@@ -30,4 +30,11 @@ def index():
         return "Malformed query string", 400
     return flask.json.jsonify([t.serialize for t in transactions])
 
+@app.route('/account/<int:account>/category')
+def aggregate(account):
+    grouped = (db.session.query(Transaction.category, db.func.sum(Transaction.rahamaara).label('sum'))
+            .filter(Transaction.tilinro == account).group_by(Transaction.category).all())
+    return flask.json.jsonify(grouped)
+
+
 

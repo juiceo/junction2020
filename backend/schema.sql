@@ -18,3 +18,7 @@ CREATE TABLE transactions(
   counterparty_account_id INT
 );
 
+CREATE INDEX transaction_start_end ON transactions(tstamp);
+CREATE INDEX transaction_category ON transactions(category);
+CREATE INDEX transaction_account ON transactions(tilinro);
+
