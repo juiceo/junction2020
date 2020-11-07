@@ -43,7 +43,7 @@ const Opportunities = (props: Props) => {
         views.push(
             <Box p={2} key="investment">
                 <InvestmentOpportunity
-                    monthlySurplus={props.totalDeficit / 12}
+                    monthlySurplus={(props.averageDeficit * 365) / 12}
                     onSkip={() => setIndex((prev) => prev + 1)}
                     onAccept={() => {}}
                 />
