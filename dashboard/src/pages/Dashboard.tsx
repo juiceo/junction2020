@@ -57,7 +57,7 @@ const Dashboard = (props: Props) => {
                 ) : (
                     <>
                         <Paper>
-                            <Box p={2}>
+                            <Box py={2}>
                                 <DailyBalanceChart data={data} />
                             </Box>
                         </Paper>
@@ -142,6 +142,10 @@ const useStyles = makeStyles((theme: Theme) =>
             display: 'grid',
             gridTemplateColumns: '1fr 1fr 1fr',
             gridColumnGap: theme.spacing(2),
+            gridRowGap: theme.spacing(2),
+            [theme.breakpoints.down('sm')]: {
+                gridTemplateColumns: '1fr',
+            },
         },
         negative: {
             color: '#FF4242',
