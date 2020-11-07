@@ -1,5 +1,5 @@
 import { ExpenseCategory, SpenderProfile } from './profiles';
-import moment from 'moment';
+import moment, { Moment } from 'moment';
 
 export type ExpenseTransaction = {
     timestamp: string;
@@ -13,10 +13,11 @@ export const getRandomAmount = (min: number, max: number): number => {
     return min + Math.random() * diff;
 };
 
-export const generateExpenses = (profile: SpenderProfile): ExpenseTransaction[] => {
-    const startDate = moment().year(2019).startOf('year');
-    const endDate = moment();
-
+export const generateExpenses = (
+    profile: SpenderProfile,
+    startDate: Moment = moment().year(2019).startOf('year'),
+    endDate: Moment = moment()
+): ExpenseTransaction[] => {
     const result: ExpenseTransaction[] = [];
 
     while (startDate.isBefore(endDate)) {

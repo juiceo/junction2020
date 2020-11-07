@@ -5,6 +5,7 @@ import { Box } from '@material-ui/core';
 
 import Dashboard from './pages/Dashboard';
 import Generate from './pages/Generate';
+import CreateUser from './pages/CreateUser';
 
 function App() {
     return (
@@ -13,6 +14,7 @@ function App() {
                 <Switch>
                     <Route exact path="/" component={Dashboard} />
                     <Route exact path="/generate" component={Generate} />
+                    <Route exact path="/admin" component={CreateUser} />
                 </Switch>
             </Router>
         </Box>
