@@ -27,7 +27,7 @@ const Dashboard = (props: Props) => {
 
     const fetchTransactions = useCallback(async () => {
         setLoading(true);
-        const url = `http://localhost:5000/?start=2020-01-01&end=2021-01-01&account=${accountNumber}`;
+        const url = `https://yolobets.herokuapp.com/?start=2020-01-01&end=2021-01-01&account=${accountNumber}`;
         await fetch(url)
             .then((res) => res.json())
             .then((data) => {
