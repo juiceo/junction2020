@@ -5,11 +5,14 @@ on:
         branches:
             - master
 
+defaults:
+    run:
+        working-directory: ./dashboard
+
 jobs:
     build-and-deploy:
         runs-on: ubuntu-latest
         name: Build & Deploy
-        working-directory: dashboard
         steps:
             - uses: actions/checkout@v2
             - name: Use Node.js
