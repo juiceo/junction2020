@@ -7,13 +7,14 @@ import moment from 'moment';
 
 import DailyBalanceChart from '../components/DailyBalanceChart';
 import { DailyBalance, getBalanceByDay } from '../data/utils';
-import { generateExpenses } from '../data/generateExpenses';
-import { student } from '../data/profiles';
 import WhatshotIcon from '@material-ui/icons/Whatshot';
 
 import img1 from '../assets/erotic-painting.png';
 
 interface Props {}
+
+const ACCOUNT_BALANCE = 2000;
+
 const Dashboard = (props: Props) => {
     const classes = useStyles();
     const [loading, setLoading] = useState<boolean>(true);
@@ -37,6 +38,7 @@ const Dashboard = (props: Props) => {
 
     const averageDeficit = meanBy(data, 'balance');
     const totalDeficit = sumBy(data, 'balance');
+    const runwayDays = averageDeficit < 0 ? Math.floor((ACCOUNT_BALANCE * -1) / averageDeficit) : '∞';
 
     return (
         <Box className={classes.wrapper}>
@@ -71,7 +73,7 @@ const Dashboard = (props: Props) => {
                             <Paper>
                                 <Box p={2} display="flex" alignItems="stretch" flexDirection="column">
                                     <Typography variant="caption">Runway left</Typography>
-                                    <Typography variant="body1">65 days</Typography>
+                                    <Typography variant="body1">{runwayDays} days</Typography>
                                 </Box>
                             </Paper>
                         </Box>

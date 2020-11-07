@@ -7,6 +7,7 @@ export interface DailyBalance {
     balance: number;
     accumulatedBalance: number;
     rollingAverage: number;
+    transactions: any[];
 }
 
 export interface ChartValue {
@@ -28,6 +29,7 @@ export const getBalanceByDay = (transactions: any[]) => {
             balance: dailySum / 100,
             accumulatedBalance: currentBalance + dailySum / 100,
             rollingAverage: meanBy(result.slice(index - 30, index), 'balance'),
+            transactions,
         };
 
         result.push(item);
