@@ -64,6 +64,11 @@ export const student: SpenderProfile = {
             label: 'Gym membership',
             amount: 60,
         },
+        {
+            category: 'Living',
+            label: 'Rent',
+            amount: 250,
+        },
     ],
 };
 
@@ -132,6 +137,11 @@ export const constructionWorker: SpenderProfile = {
             label: 'Home insurance',
             amount: 20,
         },
+        {
+            category: 'Living',
+            label: 'Rent',
+            amount: 1000,
+        },
     ],
 };
 
@@ -180,6 +190,11 @@ export const instagramInfluencer: SpenderProfile = {
             category: 'Streaming',
             label: 'Netflix',
             amount: 15,
+        },
+        {
+            category: 'Living',
+            label: 'Rent',
+            amount: 800,
         },
     ],
 };
