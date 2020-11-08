@@ -23,11 +23,12 @@ const Opportunities = (props: Props) => {
     const [index, setIndex] = useState<number>(0);
 
     const showInvestment = props.averageDeficit > 8;
-    const showSavingsGoal = props.averageDeficit > -2 && props.averageDeficit < 5;
-    const showSalary = props.averageDeficit < -2;
-    const showExpense = props.averageDeficit < -2;
-    const showCircular = props.averageDeficit < 1;
+    const showSavingsGoal = props.averageDeficit > 5;
+    const showSalary = props.averageDeficit < 0;
+    const showExpense = props.averageDeficit < 0;
+    const showCircular = props.averageDeficit < 0;
     const showGambling = props.averageDeficit > 10;
+    const showEating = props.averageDeficit < 10;
     const views = [];
 
     const getText = () => {
@@ -89,6 +90,14 @@ const Opportunities = (props: Props) => {
                     onSkip={() => setIndex((prev) => prev + 1)}
                     onAccept={() => window.open('https://www.rentle.io/careers', '_blank')}
                 />
+            </Box>
+        );
+    }
+
+    if (showEating) {
+        views.push(
+            <Box p={2}>
+                <EatingOutside onSkip={() => setIndex((prev) => prev + 1)} onAccept={() => {}} />
             </Box>
         );
     }
