@@ -24,7 +24,7 @@
         "classnames": "^2.2.6",
         "d3-array": "^2.8.0",
         "d3-time-format": "^3.0.0",
-        "lodash": "^4.17.20",
+        "lodash": "^4.17.23",
         "moment": "^2.29.1",
         "react": "^17.0.1",
         "react-dom": "^17.0.1",
